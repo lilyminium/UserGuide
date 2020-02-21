@@ -1,0 +1,713 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Non-linear dimension reduction to diffusion maps &mdash; MDAnalysis User Guide  documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../../_static/mdanalysis-logo.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../../_static/language_data.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script type="text/javascript" src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: white" >
+          
+
+          
+            <a href="../../../index.html">
+          
+
+          
+            
+            <img src="../../../_static/user_guide.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../quickstart.html">Quick start guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../faq.html">Frequently asked questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../README.html">Examples</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Data structures</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../universe.html">Universe</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../atomgroup.html">AtomGroup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../groups_of_atoms.html">Groups of atoms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../selections.html">Atom selection language</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../topology_system.html">The topology system</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Trajectories</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../trajectories/trajectories.html">Trajectories</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../trajectories/slicing_trajectories.html">Slicing trajectories</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../trajectories/transformations.html">On-the-fly transformations</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Input/output</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../reading_and_writing.html">Reading and writing files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../formats/index.html">Format overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../formats/guessing.html">Guessing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../formats/auxiliary.html">Auxiliary files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../formats/selection_exporters.html">Selection exporters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../formats/format_reference.html">Format reference</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Analysis</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../README.html">Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../README.html#alignments-and-rms-fitting">Alignments and RMS fitting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../README.html#distances-and-contacts">Distances and contacts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../README.html#trajectory-similarity">Trajectory similarity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../README.html#hydrogen-bonding">Hydrogen bonding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../README.html#structure">Structure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../README.html#volumetric-analyses">Volumetric analyses</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../README.html#dimension-reduction">Dimension reduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../README.html#polymers-and-membranes">Polymers and membranes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../custom_trajectory_analysis.html">Writing your own trajectory analysis</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Advanced</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../standard_selections.html">Standard residues in MDAnalysis selections</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../advanced_topology.html">Advanced topology concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../datasets.html">Example data</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Contributing</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../contributing.html">Contributing to MDAnalysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../contributing_code.html">Contributing to the main codebase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../contributing_docs.html">Contributing to the user guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../preparing_releases_and_hotfixes.html">Preparing a release</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_imports.html">Module imports in MDAnalysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../testing.html">Tests in MDAnalysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../references.html">References</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">MDAnalysis User Guide</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+      <li>Non-linear dimension reduction to diffusion maps</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../../_sources/examples/analysis/reduced_dimensions/diffusion_map.ipynb.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput,
+div.nbinput div.prompt,
+div.nbinput div.input_area,
+div.nbinput div[class*=highlight],
+div.nbinput div[class*=highlight] pre,
+div.nboutput,
+div.nbinput div.prompt,
+div.nbinput div.output_area,
+div.nboutput div[class*=highlight],
+div.nboutput div[class*=highlight] pre {
+    background: none;
+    border: none;
+    padding: 0 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+/* avoid gaps between output lines */
+div.nboutput div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput,
+div.nboutput {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput,
+    div.nboutput {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput div.prompt pre {
+    color: #307FC1;
+}
+
+/* output prompt */
+div.nboutput div.prompt pre {
+    color: #BF5B3D;
+}
+
+/* all prompts */
+div.nbinput div.prompt,
+div.nboutput div.prompt {
+    min-width: 5ex;
+    padding-top: 0.4em;
+    padding-right: 0.4em;
+    text-align: right;
+    flex: 0;
+}
+@media (max-width: 540px) {
+    div.nbinput div.prompt,
+    div.nboutput div.prompt {
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput div.prompt.empty {
+        padding: 0;
+    }
+}
+
+/* disable scrollbars on prompts */
+div.nbinput div.prompt pre,
+div.nboutput div.prompt pre {
+    overflow: hidden;
+}
+
+/* input/output area */
+div.nbinput div.input_area,
+div.nboutput div.output_area {
+    padding: 0.4em;
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput div.input_area,
+    div.nboutput div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput div.input_area {
+    border: 1px solid #e0e0e0;
+    border-radius: 2px;
+    background: #f5f5f5;
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.imgmath center alignment in output cells */
+div.nboutput div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-default-inverse-fg { color: #FFFFFF; }
+.ansi-default-inverse-bg { background-color: #000000; }
+
+.ansi-bold { font-weight: bold; }
+.ansi-underline { text-decoration: underline; }
+
+/* Some additional styling taken form the Jupyter notebook CSS */
+div.rendered_html table {
+  border: none;
+  border-collapse: collapse;
+  border-spacing: 0;
+  color: black;
+  font-size: 12px;
+  table-layout: fixed;
+}
+div.rendered_html thead {
+  border-bottom: 1px solid black;
+  vertical-align: bottom;
+}
+div.rendered_html tr,
+div.rendered_html th,
+div.rendered_html td {
+  text-align: right;
+  vertical-align: middle;
+  padding: 0.5em 0.5em;
+  line-height: normal;
+  white-space: normal;
+  max-width: none;
+  border: none;
+}
+div.rendered_html th {
+  font-weight: bold;
+}
+div.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+div.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast,
+.nboutput.nblast {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast + .nbinput {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="Non-linear-dimension-reduction-to-diffusion-maps">
+<h1>Non-linear dimension reduction to diffusion maps<a class="headerlink" href="#Non-linear-dimension-reduction-to-diffusion-maps" title="Permalink to this headline">¶</a></h1>
+<p>Here we reduce the dimensions of a trajectory into a diffusion map.</p>
+<p><strong>Last updated:</strong> February 2020</p>
+<p><strong>Minimum version of MDAnalysis:</strong> 0.17.0</p>
+<p><strong>Packages required:</strong></p>
+<ul class="simple">
+<li><p>MDAnalysis (<a class="bibtex reference internal" href="../../../references.html#michaud-agrawal-mdanalysis-2011" id="id1">[MADWB11]</a>, <a class="bibtex reference internal" href="../../../references.html#gowers-mdanalysis-2016" id="id2">[GLB+16]</a>)</p></li>
+<li><p>MDAnalysisTests</p></li>
+</ul>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">MDAnalysis</span> <span class="kn">as</span> <span class="nn">mda</span>
+<span class="kn">from</span> <span class="nn">MDAnalysis.tests.datafiles</span> <span class="kn">import</span> <span class="n">PSF</span><span class="p">,</span> <span class="n">DCD</span>
+<span class="kn">from</span> <span class="nn">MDAnalysis.analysis</span> <span class="kn">import</span> <span class="n">diffusionmap</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+</pre></div>
+</div>
+</div>
+<div class="section" id="Loading-files">
+<h2>Loading files<a class="headerlink" href="#Loading-files" title="Permalink to this headline">¶</a></h2>
+<p>The test files we will be working with here feature adenylate kinase (AdK), a phosophotransferase enzyme. (<a class="bibtex reference internal" href="../../../references.html#beckstein-zipping-2009" id="id3">[BDPW09]</a>) The trajectory <code class="docutils literal notranslate"><span class="pre">DCD</span></code> samples a transition from a closed to an open conformation.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">u</span> <span class="o">=</span> <span class="n">mda</span><span class="o">.</span><span class="n">Universe</span><span class="p">(</span><span class="n">PSF</span><span class="p">,</span> <span class="n">DCD</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">dmap</span> <span class="o">=</span> <span class="n">diffusionmap</span><span class="o">.</span><span class="n">DiffusionMap</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">select</span><span class="o">=</span><span class="s1">&#39;backbone&#39;</span><span class="p">,</span> <span class="n">epsilon</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">dmap</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="output_area highlight-none notranslate"><div class="highlight"><pre>
+<span></span>&lt;MDAnalysis.analysis.diffusionmap.DiffusionMap at 0x120b43c50&gt;
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">dmap</span><span class="o">.</span><span class="n">eigenvalues</span><span class="p">[:</span><span class="mi">10</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="output_area highlight-none notranslate"><div class="highlight"><pre>
+<span></span>[&lt;matplotlib.lines.Line2D at 0x120b42410&gt;]
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../_images/examples_analysis_reduced_dimensions_diffusion_map_5_1.png" src="../../../_images/examples_analysis_reduced_dimensions_diffusion_map_5_1.png" />
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">fit</span> <span class="o">=</span> <span class="n">dmap</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">time</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">fit</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="output_area highlight-none notranslate"><div class="highlight"><pre>
+<span></span>array([[-9.47948061e-02, -7.59495111e-02, -5.47077199e-02],
+       [-1.66067940e-01, -1.32017243e-01, -9.44092770e-02],
+       [-1.99960405e-01, -1.54474739e-01, -1.07424677e-01],
+       [ 2.28814609e-01,  1.68694363e-01,  1.11460122e-01],
+       [ 2.50383632e-01,  1.71873083e-01,  1.03406697e-01],
+       [-2.50199664e-01, -1.56912015e-01, -8.12446062e-02],
+       [ 2.44546758e-01,  1.36780876e-01,  5.49902250e-02],
+       [ 2.46111139e-01,  1.16860780e-01,  2.68157499e-02],
+       [-2.12683519e-01, -7.53727228e-02,  7.31232455e-03],
+       [ 1.47584845e-01,  2.33288497e-02, -3.50970127e-02],
+       [ 1.18955077e-01, -2.65221496e-02, -7.43193445e-02],
+       [ 1.41126237e-01, -9.71074476e-02, -1.56091700e-01],
+       [-6.89273524e-02,  1.05297877e-01,  1.34996812e-01],
+       [-1.43198826e-05, -1.73408006e-01, -1.55402531e-01],
+       [ 3.59762508e-02,  1.66972269e-01,  1.08416113e-01],
+       [ 8.47486607e-02,  2.50379589e-01,  1.19461783e-01],
+       [ 3.13380103e-02,  6.66117529e-02,  1.88484093e-02],
+       [-7.38321094e-02, -1.39450412e-01, -2.55694742e-02],
+       [-1.03194968e-01, -1.63724641e-01,  6.29499299e-03],
+       [-1.16315888e-01, -1.70583023e-01,  2.35271461e-02],
+       [-1.07439129e-01, -1.45842601e-01,  3.27656236e-02],
+       [ 2.55954863e-01,  3.14832059e-01, -1.00934081e-01],
+       [-1.47043061e-01, -1.43761282e-01,  7.32981735e-02],
+       [-2.72167337e-01, -1.03771510e-01,  1.44889767e-01],
+       [ 8.11248843e-02,  4.71907842e-02, -4.42338562e-02],
+       [ 1.14970812e-01,  4.48913132e-02, -6.02716372e-02],
+       [-5.46730552e-01,  1.44368246e-01,  2.32597575e-01],
+       [ 9.74706358e-03, -1.61391559e-02, -2.15702305e-03],
+       [-1.31399475e-04,  1.93256734e-03, -1.58761185e-04],
+       [ 1.89791970e-01, -1.76783408e-01, -2.50958800e-03],
+       [-4.43689174e-01,  4.16017769e-01, -2.09604206e-01],
+       [-2.37163912e-02,  1.93014900e-02, -8.79229070e-03],
+       [ 3.82313379e-02, -3.97909864e-02,  2.21470779e-02],
+       [-7.72017080e-04, -1.68932767e-05,  6.25253580e-04],
+       [ 1.61290126e-01, -1.21535769e-01,  2.21942438e-01],
+       [ 8.01044835e-04,  2.02126974e-03,  9.33094517e-04],
+       [ 1.17906380e-02, -2.39567459e-02,  1.69532806e-02],
+       [-3.30954818e-02,  4.95644453e-02, -3.75452060e-02],
+       [ 1.16565287e-01, -7.76668246e-02,  8.65616354e-02],
+       [ 1.08387615e-03,  1.76083699e-03, -1.60421941e-03],
+       [ 6.70152765e-03, -9.03205822e-04, -8.75407908e-03],
+       [-2.79929791e-02,  6.98110542e-03,  3.14133442e-02],
+       [ 9.13526407e-03, -3.37966741e-03, -7.04527830e-03],
+       [-9.72552263e-07, -4.13718852e-07,  2.49853587e-07],
+       [ 2.70923579e-02, -1.21270364e-02, -2.19419110e-02],
+       [ 2.39217762e-02, -1.25613140e-02, -8.03452194e-03],
+       [-2.30381829e-02,  1.10092141e-02,  1.28731135e-02],
+       [-4.99698304e-03,  2.02193956e-03, -8.54140367e-06],
+       [-1.71850866e-03,  4.99354002e-05,  2.82857167e-03],
+       [-6.50397241e-03,  2.55586474e-02, -3.75881983e-02],
+       [-2.14493707e-03,  4.33260261e-03, -4.37065841e-03],
+       [ 2.19407118e-07,  1.91394699e-07,  7.56127335e-07],
+       [-1.14788701e-06, -2.48754737e-06,  4.60355403e-06],
+       [-5.49278578e-03,  8.39950776e-03, -4.80694122e-03],
+       [ 8.03466875e-03, -1.19651203e-02,  2.66252362e-03],
+       [ 3.09380952e-06, -5.80713373e-07, -7.77521967e-07],
+       [-2.77290966e-03,  3.95002406e-04,  1.58232807e-03],
+       [ 2.58493046e-02, -1.55236627e-02,  1.53359468e-03],
+       [-3.49752750e-06, -6.44252798e-07, -6.22808742e-06],
+       [-8.78061648e-06,  4.95952820e-06,  4.08775010e-06],
+       [-2.10067190e-03,  1.02726860e-03, -7.01308057e-04],
+       [-7.99850042e-03,  5.85194889e-03, -3.01477932e-04],
+       [ 5.65573297e-06, -2.21400873e-06, -6.86679586e-06],
+       [ 7.08874479e-06, -1.66896333e-05,  6.02414153e-06],
+       [ 3.98301754e-03, -4.61878116e-03,  1.59599234e-03],
+       [-2.41115509e-02,  2.86552782e-02, -9.51109260e-03],
+       [-3.19459626e-05,  1.51399642e-05,  3.38008133e-05],
+       [ 2.71833869e-06,  9.46021321e-07, -3.79718669e-06],
+       [ 1.10623369e-05, -1.75377513e-07, -2.36729959e-05],
+       [ 4.12681589e-03, -3.84581601e-03,  8.97311809e-04],
+       [-1.20313636e-02,  1.31762663e-02, -3.80631582e-03],
+       [-4.79412738e-05,  4.09524741e-05,  1.25997796e-05],
+       [-4.40194973e-03,  2.52114326e-03,  8.39702721e-04],
+       [ 6.62970321e-03,  3.42223276e-03, -8.02623547e-03],
+       [ 6.22809965e-04,  1.21933389e-03, -1.62077070e-03],
+       [ 3.95959824e-05, -3.40192962e-05,  8.55580766e-06],
+       [-3.20808587e-04, -7.71223894e-03,  7.73400897e-03],
+       [ 3.60022861e-03, -6.97379275e-03,  4.78001377e-03],
+       [-5.25353641e-03,  8.77381796e-03, -4.85587287e-04],
+       [-4.71610600e-05,  5.25300689e-05,  2.61333613e-05],
+       [ 2.62492457e-04, -2.51552186e-04, -1.49977065e-04],
+       [ 9.87888449e-04, -1.77224624e-03, -4.33544331e-04],
+       [ 1.36401664e-04, -1.42315576e-04, -1.26919610e-04],
+       [-2.20947565e-03,  4.69544036e-03, -1.98163950e-03],
+       [ 1.05068341e-05, -5.56791274e-05,  1.81966652e-04],
+       [-1.53132312e-05, -3.47968344e-05, -1.25551781e-04],
+       [-2.04423085e-04,  1.41378514e-04,  7.99721775e-04],
+       [-7.45630582e-04,  7.46050192e-04, -1.64624588e-03],
+       [ 9.13827319e-04, -1.02946871e-03,  5.75442281e-04],
+       [ 1.01115638e-03, -1.15363557e-03, -2.42301224e-04],
+       [-9.28550536e-05, -1.92127567e-04,  9.40980602e-05],
+       [-6.25782744e-05,  4.64226348e-05,  1.97465650e-04],
+       [ 9.34697307e-04, -2.69385337e-03,  1.14502838e-03],
+       [-2.00214394e-04, -3.20397461e-03,  3.49433959e-04],
+       [-2.54495318e-04,  4.52068424e-04, -2.34791504e-04],
+       [-6.24183142e-03,  1.63358361e-02, -7.39439916e-03],
+       [-7.01684675e-04, -1.46898631e-03, -4.03102911e-04],
+       [-4.15202159e-04,  3.81447425e-03, -1.08760435e-03]])
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="k">print</span> <span class="s2">&quot;yes&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+<span class="ansi-cyan-fg">  File </span><span class="ansi-green-fg">&#34;&lt;ipython-input-10-dbc51e0c5b49&gt;&#34;</span><span class="ansi-cyan-fg">, line </span><span class="ansi-green-fg">1</span>
+<span class="ansi-red-fg">    print &#34;yes&#34;</span>
+              ^
+<span class="ansi-red-fg">SyntaxError</span><span class="ansi-red-fg">:</span> Missing parentheses in call to &#39;print&#39;. Did you mean print(&#34;yes&#34;)?
+
+</pre></div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Lily Wang, Richard J Gowers, Oliver Beckstein
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
