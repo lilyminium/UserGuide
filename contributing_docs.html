@@ -342,12 +342,17 @@ make html
 <div class="section" id="adding-changes-to-the-userguide">
 <span id="add-changes-user-guide"></span><h2>Adding changes to the UserGuide<a class="headerlink" href="#adding-changes-to-the-userguide" title="Permalink to this headline">¶</a></h2>
 <p>As with the code, <a class="reference internal" href="contributing_code.html#adding-code-to-mda"><span class="std std-ref">commit and push</span></a> your code to GitHub. Then <a class="reference internal" href="contributing_code.html#id5"><span class="std std-ref">create a pull request</span></a>. The only test run for the User Guide is: that your file compile into HTML documents without errors. As usual, a developer will review your PR and merge the code into the User Guide when it looks good.</p>
-<p>It is often difficult to review Jupyter notebooks on GitHub, especially if you embed widgets and images. One way to make it easier on the developers who review your changes is to build the changes on your forked repository and link the relevant sections in your pull request. To do this, check out a <code class="docutils literal notranslate"><span class="pre">gh-pages</span></code> branch and merge your new branch into it.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git checkout gh-pages
+<p>It is often difficult to review Jupyter notebooks on GitHub, especially if you embed widgets and images. One way to make it easier on the developers who review your changes is to build the changes on your forked repository and link the relevant sections in your pull request. To do this, create a <code class="docutils literal notranslate"><span class="pre">gh-pages</span></code> branch and merge your new branch into it.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># the first time</span>
+git checkout -b gh-pages
 git merge origin/my-new-branch
 </pre></div>
 </div>
-<p>Fix any merge conflicts that arise. Now you can build your pages with the <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">github</span></code> macro, which builds the files and copies them to the top level of your directory.</p>
+<p>Fix any merge conflicts that arise. Then edit <code class="docutils literal notranslate"><span class="pre">UserGuide/doc/source/conf.py</span></code> and change the URL of the site, which is set to <code class="docutils literal notranslate"><span class="pre">site_url</span> <span class="pre">=</span> <span class="pre">&quot;https://www.mdanalysis.org/UserGuide&quot;</span></code>. Change it to your personal site, e.g.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">site_url</span> <span class="o">=</span> <span class="s2">&quot;https://www.my_user_name.github.io/UserGuide&quot;</span>
+</pre></div>
+</div>
+<p>Now you can build your pages with the <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">github</span></code> macro in the <code class="docutils literal notranslate"><span class="pre">UserGuide/doc/</span></code> directory, which builds the files and copies them to the top level of your directory.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make github
 </pre></div>
 </div>
@@ -359,6 +364,13 @@ git push -f origin gh-pages
 </div>
 <p>On GitHub, navigate to your fork of the repository and go to <strong>Settings</strong>. In the <strong>GitHub Pages</strong> section, select the “gh-pages branch” from the <strong>Source</strong> dropdown. Check that your website is published at the given URL.</p>
 <img alt="_images/gh-pages-settings.png" src="_images/gh-pages-settings.png" />
+<p>For each time you add changes to another branch later, just merge into gh-pages and rebuild.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git checkout gh-pages
+git merge origin/my_branch
+<span class="nb">cd</span> doc/
+make github
+</pre></div>
+</div>
 </div>
 <div class="section" id="automatically-building-documentation">
 <span id="autobuild-sphinx"></span><h2>Automatically building documentation<a class="headerlink" href="#automatically-building-documentation" title="Permalink to this headline">¶</a></h2>
