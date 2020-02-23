@@ -550,7 +550,7 @@ div.rendered_html tbody tr:hover {
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="n">ca1</span> <span class="o">=</span> <span class="n">contacts</span><span class="o">.</span><span class="n">Contacts</span><span class="p">(</span><span class="n">u</span><span class="p">,</span>
-                        <span class="n">selection</span><span class="o">=</span><span class="p">(</span><span class="n">sel_acidic</span><span class="p">,</span> <span class="n">sel_basic</span><span class="p">),</span>
+                        <span class="n">select</span><span class="o">=</span><span class="p">(</span><span class="n">sel_acidic</span><span class="p">,</span> <span class="n">sel_basic</span><span class="p">),</span>
                         <span class="n">refgroup</span><span class="o">=</span><span class="p">(</span><span class="n">acidic</span><span class="p">,</span> <span class="n">basic</span><span class="p">),</span>
                         <span class="n">radius</span><span class="o">=</span><span class="mf">4.5</span><span class="p">,</span>
                         <span class="n">method</span><span class="o">=</span><span class="s1">&#39;hard_cut&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
@@ -627,16 +627,32 @@ div.rendered_html tbody tr:hover {
 </table>
 </div></div>
 </div>
-<p>Note that the data is presented as fractions of the native contacts present in the reference configuration. In order to find the number of contacts present, multiply the data with the number of contacts in the reference configuration.</p>
+<p>Note that the data is presented as fractions of the native contacts present in the reference configuration. In order to find the number of contacts present, multiply the data with the number of contacts in the reference configuration. Initial contact matrices are saved as pairwise arrays in <code class="docutils literal notranslate"><span class="pre">ca1.initial_contacts</span></code>.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">ref_distance</span> <span class="o">=</span> <span class="n">contacts</span><span class="o">.</span><span class="n">distance_array</span><span class="p">(</span><span class="n">acidic</span><span class="o">.</span><span class="n">positions</span><span class="p">,</span>
-                                       <span class="n">basic</span><span class="o">.</span><span class="n">positions</span><span class="p">)</span>
-<span class="n">ref_contacts</span> <span class="o">=</span> <span class="n">contacts</span><span class="o">.</span><span class="n">contact_matrix</span><span class="p">(</span><span class="n">ref_distance</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="mf">4.5</span><span class="p">)</span>
-<span class="n">n_ref</span> <span class="o">=</span> <span class="n">ref_contacts</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span></span><span class="n">ca1</span><span class="o">.</span><span class="n">initial_contacts</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="output_area highlight-none notranslate"><div class="highlight"><pre>
+<span></span>(70, 44)
+</pre></div>
+</div>
+</div>
+<p>You can sum this to work out the number of contacts in your reference, and apply that to the fractions of references in your <code class="docutils literal notranslate"><span class="pre">timeseries</span></code> data.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">n_ref</span> <span class="o">=</span> <span class="n">ca1</span><span class="o">.</span><span class="n">initial_contacts</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
 <span class="k">print</span><span class="p">(</span><span class="s1">&#39;There are {} contacts in the reference.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">n_ref</span><span class="p">))</span>
 </pre></div>
 </div>
@@ -650,7 +666,7 @@ There are 69 contacts in the reference.
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -670,7 +686,7 @@ There are 69 contacts in the reference.
 <div class="section" id="Plotting">
 <h3>Plotting<a class="headerlink" href="#Plotting" title="Permalink to this headline">¶</a></h3>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -680,7 +696,7 @@ There are 69 contacts in the reference.
 </div>
 </div>
 <div class="nboutput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
 </div>
 <div class="output_area highlight-none notranslate"><div class="highlight"><pre>
@@ -692,7 +708,7 @@ There are 69 contacts in the reference.
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../../../_images/examples_analysis_distances_and_contacts_contacts_native_fraction_16_1.png" src="../../../_images/examples_analysis_distances_and_contacts_contacts_native_fraction_16_1.png" />
+<img alt="../../../_images/examples_analysis_distances_and_contacts_contacts_native_fraction_18_1.png" src="../../../_images/examples_analysis_distances_and_contacts_contacts_native_fraction_18_1.png" />
 </div>
 </div>
 </div>
@@ -701,7 +717,7 @@ There are 69 contacts in the reference.
 <h2>Calculating fraction of native contacts, with pairs assigned based on a soft potential<a class="headerlink" href="#Calculating-fraction-of-native-contacts,-with-pairs-assigned-based-on-a-soft-potential" title="Permalink to this headline">¶</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">refgroup</span></code> can either be two contacting groups in a reference configuration, or a list of tuples of two contacting groups. Below, we set the reference trajectory to its last frame and select another pair of contacting atomgroups.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -717,11 +733,11 @@ There are 69 contacts in the reference.
 <p><span class="math notranslate nohighlight">\(r\)</span> is a distance array and <span class="math notranslate nohighlight">\(r0\)</span> are the distances in the reference group. <span class="math notranslate nohighlight">\(\beta\)</span> controls the softness of the switching function and <span class="math notranslate nohighlight">\(\lambda\)</span> is the tolerance of the reference distance.</p>
 <p>Suggested values for <span class="math notranslate nohighlight">\(\lambda\)</span> is 1.8 for all-atom simulations and 1.5 for coarse-grained simulations. The default value of <span class="math notranslate nohighlight">\(\beta\)</span> is 5.0. To change these, pass <code class="docutils literal notranslate"><span class="pre">kwargs</span></code> to contacts.Contacts.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">ca2</span> <span class="o">=</span> <span class="n">contacts</span><span class="o">.</span><span class="n">Contacts</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">selection</span><span class="o">=</span><span class="p">(</span><span class="n">sel_acidic</span><span class="p">,</span> <span class="n">sel_basic</span><span class="p">),</span>
+<span></span><span class="n">ca2</span> <span class="o">=</span> <span class="n">contacts</span><span class="o">.</span><span class="n">Contacts</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">select</span><span class="o">=</span><span class="p">(</span><span class="n">sel_acidic</span><span class="p">,</span> <span class="n">sel_basic</span><span class="p">),</span>
                         <span class="n">refgroup</span><span class="o">=</span><span class="p">[(</span><span class="n">acidic</span><span class="p">,</span> <span class="n">basic</span><span class="p">),</span> <span class="p">(</span><span class="n">acidic_2</span><span class="p">,</span> <span class="n">basic_2</span><span class="p">)],</span>
                         <span class="n">radius</span><span class="o">=</span><span class="mf">4.5</span><span class="p">,</span>
                         <span class="n">method</span><span class="o">=</span><span class="s1">&#39;soft_cut&#39;</span><span class="p">,</span>
@@ -732,7 +748,7 @@ There are 69 contacts in the reference.
 </div>
 <p>Again, the first column of the data array in <code class="docutils literal notranslate"><span class="pre">ca2.timeseries</span></code> is the frame. The next columns of the array are fractions of native contacts with reference to the <code class="docutils literal notranslate"><span class="pre">refgroup</span></code>s passed, in order.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -745,7 +761,7 @@ There are 69 contacts in the reference.
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
 </pre></div>
 </div>
 <div class="output_area rendered_html docutils container">
@@ -811,7 +827,7 @@ There are 69 contacts in the reference.
 <h3>Plotting<a class="headerlink" href="#Plotting" title="Permalink to this headline">¶</a></h3>
 <p>Again, we can plot over time.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -820,11 +836,11 @@ There are 69 contacts in the reference.
 </div>
 </div>
 <div class="nboutput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
 </pre></div>
 </div>
 <div class="output_area highlight-none notranslate"><div class="highlight"><pre>
-<span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x1252da6d0&gt;
+<span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x11c385dd0&gt;
 </pre></div>
 </div>
 </div>
@@ -832,12 +848,12 @@ There are 69 contacts in the reference.
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../../../_images/examples_analysis_distances_and_contacts_contacts_native_fraction_26_1.png" src="../../../_images/examples_analysis_distances_and_contacts_contacts_native_fraction_26_1.png" />
+<img alt="../../../_images/examples_analysis_distances_and_contacts_contacts_native_fraction_28_1.png" src="../../../_images/examples_analysis_distances_and_contacts_contacts_native_fraction_28_1.png" />
 </div>
 </div>
 <p>We can also plot the fraction of salt bridges from the first frame, over the fraction from the last frame, as a way to characterise the transition of the protein from closed to open.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -847,7 +863,7 @@ There are 69 contacts in the reference.
 </div>
 </div>
 <div class="nboutput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
 </pre></div>
 </div>
 <div class="output_area highlight-none notranslate"><div class="highlight"><pre>
@@ -859,7 +875,7 @@ There are 69 contacts in the reference.
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../../../_images/examples_analysis_distances_and_contacts_contacts_native_fraction_28_1.png" src="../../../_images/examples_analysis_distances_and_contacts_contacts_native_fraction_28_1.png" />
+<img alt="../../../_images/examples_analysis_distances_and_contacts_contacts_native_fraction_30_1.png" src="../../../_images/examples_analysis_distances_and_contacts_contacts_native_fraction_30_1.png" />
 </div>
 </div>
 </div>
@@ -868,11 +884,11 @@ There are 69 contacts in the reference.
 <h2>Calculating contacts within a cutoff<a class="headerlink" href="#Calculating-contacts-within-a-cutoff" title="Permalink to this headline">¶</a></h2>
 <p>We can also determine the fraction of native contacts within a certain radius cutoff using <code class="docutils literal notranslate"><span class="pre">radius_cut_q</span></code>.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">ca3</span> <span class="o">=</span> <span class="n">contacts</span><span class="o">.</span><span class="n">Contacts</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">selection</span><span class="o">=</span><span class="p">(</span><span class="n">sel_acidic</span><span class="p">,</span> <span class="n">sel_basic</span><span class="p">),</span>
+<span></span><span class="n">ca3</span> <span class="o">=</span> <span class="n">contacts</span><span class="o">.</span><span class="n">Contacts</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">select</span><span class="o">=</span><span class="p">(</span><span class="n">sel_acidic</span><span class="p">,</span> <span class="n">sel_basic</span><span class="p">),</span>
                         <span class="n">refgroup</span><span class="o">=</span><span class="p">[(</span><span class="n">acidic</span><span class="p">,</span> <span class="n">basic</span><span class="p">)],</span>
                         <span class="n">radius</span><span class="o">=</span><span class="mf">4.5</span><span class="p">,</span>
                         <span class="n">method</span><span class="o">=</span><span class="s1">&#39;radius_cut&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
@@ -880,7 +896,7 @@ There are 69 contacts in the reference.
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -892,7 +908,7 @@ There are 69 contacts in the reference.
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
 </pre></div>
 </div>
 <div class="output_area rendered_html docutils container">
@@ -951,7 +967,7 @@ There are 69 contacts in the reference.
 <div class="section" id="Plotting">
 <h3>Plotting<a class="headerlink" href="#Plotting" title="Permalink to this headline">¶</a></h3>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -960,11 +976,11 @@ There are 69 contacts in the reference.
 </div>
 </div>
 <div class="nboutput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
 </pre></div>
 </div>
 <div class="output_area highlight-none notranslate"><div class="highlight"><pre>
-<span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x124db3f50&gt;
+<span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x11beaaad0&gt;
 </pre></div>
 </div>
 </div>
@@ -972,7 +988,7 @@ There are 69 contacts in the reference.
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../../../_images/examples_analysis_distances_and_contacts_contacts_native_fraction_34_1.png" src="../../../_images/examples_analysis_distances_and_contacts_contacts_native_fraction_34_1.png" />
+<img alt="../../../_images/examples_analysis_distances_and_contacts_contacts_native_fraction_36_1.png" src="../../../_images/examples_analysis_distances_and_contacts_contacts_native_fraction_36_1.png" />
 </div>
 </div>
 </div>
