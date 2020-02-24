@@ -23,14 +23,16 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-        <script type="text/javascript" src="_static/jquery.js"></script>
-        <script type="text/javascript" src="_static/underscore.js"></script>
-        <script type="text/javascript" src="_static/doctools.js"></script>
-        <script type="text/javascript" src="_static/language_data.js"></script>
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-        <script type="text/javascript" src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
         <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+        <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
     
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
@@ -231,13 +233,13 @@
 /* CSS overrides for sphinx_rtd_theme */
 
 /* 24px margin */
-.nbinput.nblast,
-.nboutput.nblast {
+.nbinput.nblast.container,
+.nboutput.nblast.container {
     margin-bottom: 19px;  /* padding has already 5px */
 }
 
 /* ... except between code cells! */
-.nblast + .nbinput {
+.nblast.container + .nbinput.container {
     margin-top: -19px;
 }
 
@@ -262,7 +264,7 @@
 <div class="section" id="atom-selection-language">
 <h3>Atom selection language<a class="headerlink" href="#atom-selection-language" title="Permalink to this headline">¶</a></h3>
 <p>AtomGroup instances are typically created with <a class="reference external" href="https://www.mdanalysis.org/docs/documentation_pages/core/universe.html#MDAnalysis.core.universe.Universe.select_atoms" title="(in MDAnalysis v0.20)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Universe.select_atoms</span></code></a> or by manipulating another <a class="reference external" href="https://www.mdanalysis.org/docs/documentation_pages/core/groups.html#MDAnalysis.core.groups.AtomGroup" title="(in MDAnalysis v0.20)"><code class="xref py py-class docutils literal notranslate"><span class="pre">AtomGroup</span></code></a>, e.g. by slicing.</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="kn">import</span> <span class="nn">MDAnalysis</span> <span class="kn">as</span> <span class="nn">mda</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="kn">import</span> <span class="nn">MDAnalysis</span> <span class="k">as</span> <span class="nn">mda</span>
 
 <span class="gp">In [2]: </span><span class="kn">from</span> <span class="nn">MDAnalysis.tests.datafiles</span> <span class="kn">import</span> <span class="n">PDB</span>
 
@@ -277,7 +279,7 @@
 <div class="section" id="indexing-and-slicing">
 <h3>Indexing and slicing<a class="headerlink" href="#indexing-and-slicing" title="Permalink to this headline">¶</a></h3>
 <p>An <a class="reference external" href="https://www.mdanalysis.org/docs/documentation_pages/core/groups.html#MDAnalysis.core.groups.AtomGroup" title="(in MDAnalysis v0.20)"><code class="xref py py-class docutils literal notranslate"><span class="pre">AtomGroup</span></code></a> can be indexed and sliced like a list:</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [5]: </span><span class="k">print</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">atoms</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [5]: </span><span class="nb">print</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">atoms</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
 <span class="go">&lt;Atom 1: N of type N of resname MET, resid 1 and segid SYSTEM and altLoc &gt;</span>
 </pre></div>
 </div>
@@ -479,26 +481,26 @@ that are part of <code class="docutils literal notranslate"><span class="pre">s<
 
 <span class="gp">In [27]: </span><span class="n">ag</span> <span class="o">=</span> <span class="n">mda</span><span class="o">.</span><span class="n">AtomGroup</span><span class="p">([</span><span class="n">atom1</span><span class="p">,</span> <span class="n">atom2</span><span class="p">,</span> <span class="n">atom3</span><span class="p">])</span>
 
-<span class="gp">In [28]: </span><span class="k">print</span><span class="p">(</span><span class="n">ag</span><span class="p">)</span>
+<span class="gp">In [28]: </span><span class="nb">print</span><span class="p">(</span><span class="n">ag</span><span class="p">)</span>
 <span class="go">&lt;AtomGroup [&lt;Atom 5: CA of type C of resname MET, resid 1 and segid SYSTEM and altLoc &gt;, &lt;Atom 7: CB of type C of resname MET, resid 1 and segid SYSTEM and altLoc &gt;, &lt;Atom 3: H2 of type H of resname MET, resid 1 and segid SYSTEM and altLoc &gt;]&gt;</span>
 </pre></div>
 </div>
 <p>A neat shortcut for this is to simply add an <a class="reference external" href="https://www.mdanalysis.org/docs/documentation_pages/core/groups.html#MDAnalysis.core.groups.Atom" title="(in MDAnalysis v0.20)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Atom</span></code></a> to another <a class="reference external" href="https://www.mdanalysis.org/docs/documentation_pages/core/groups.html#MDAnalysis.core.groups.Atom" title="(in MDAnalysis v0.20)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Atom</span></code></a> or <a class="reference external" href="https://www.mdanalysis.org/docs/documentation_pages/core/groups.html#MDAnalysis.core.groups.AtomGroup" title="(in MDAnalysis v0.20)"><code class="xref py py-class docutils literal notranslate"><span class="pre">AtomGroup</span></code></a>:</p>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [29]: </span><span class="n">ag</span> <span class="o">=</span> <span class="n">atom1</span> <span class="o">+</span> <span class="n">atom2</span>
 
-<span class="gp">In [30]: </span><span class="k">print</span><span class="p">(</span><span class="n">ag</span><span class="p">)</span>
+<span class="gp">In [30]: </span><span class="nb">print</span><span class="p">(</span><span class="n">ag</span><span class="p">)</span>
 <span class="go">&lt;AtomGroup [&lt;Atom 5: CA of type C of resname MET, resid 1 and segid SYSTEM and altLoc &gt;, &lt;Atom 7: CB of type C of resname MET, resid 1 and segid SYSTEM and altLoc &gt;]&gt;</span>
 
 <span class="gp">In [31]: </span><span class="n">ag</span> <span class="o">+=</span> <span class="n">atom3</span>
 
-<span class="gp">In [32]: </span><span class="k">print</span><span class="p">(</span><span class="n">ag</span><span class="p">)</span>
+<span class="gp">In [32]: </span><span class="nb">print</span><span class="p">(</span><span class="n">ag</span><span class="p">)</span>
 <span class="go">&lt;AtomGroup [&lt;Atom 5: CA of type C of resname MET, resid 1 and segid SYSTEM and altLoc &gt;, &lt;Atom 7: CB of type C of resname MET, resid 1 and segid SYSTEM and altLoc &gt;, &lt;Atom 3: H2 of type H of resname MET, resid 1 and segid SYSTEM and altLoc &gt;]&gt;</span>
 </pre></div>
 </div>
 <p>An alternative method is to provide a list of indices and the Universe that the <a class="reference external" href="https://www.mdanalysis.org/docs/documentation_pages/core/groups.html#MDAnalysis.core.groups.Atom" title="(in MDAnalysis v0.20)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Atom</span></code></a>s belong to:</p>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [33]: </span><span class="n">ag</span> <span class="o">=</span> <span class="n">mda</span><span class="o">.</span><span class="n">AtomGroup</span><span class="p">([</span><span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">u</span><span class="p">)</span>
 
-<span class="gp">In [34]: </span><span class="k">print</span><span class="p">(</span><span class="n">ag</span><span class="p">)</span>
+<span class="gp">In [34]: </span><span class="nb">print</span><span class="p">(</span><span class="n">ag</span><span class="p">)</span>
 <span class="go">&lt;AtomGroup [&lt;Atom 5: CA of type C of resname MET, resid 1 and segid SYSTEM and altLoc &gt;, &lt;Atom 7: CB of type C of resname MET, resid 1 and segid SYSTEM and altLoc &gt;, &lt;Atom 3: H2 of type H of resname MET, resid 1 and segid SYSTEM and altLoc &gt;]&gt;</span>
 </pre></div>
 </div>

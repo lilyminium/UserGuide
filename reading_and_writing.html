@@ -23,14 +23,16 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-        <script type="text/javascript" src="_static/jquery.js"></script>
-        <script type="text/javascript" src="_static/underscore.js"></script>
-        <script type="text/javascript" src="_static/doctools.js"></script>
-        <script type="text/javascript" src="_static/language_data.js"></script>
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-        <script type="text/javascript" src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
         <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+        <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
     
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
@@ -238,13 +240,13 @@
 /* CSS overrides for sphinx_rtd_theme */
 
 /* 24px margin */
-.nbinput.nblast,
-.nboutput.nblast {
+.nbinput.nblast.container,
+.nboutput.nblast.container {
     margin-bottom: 19px;  /* padding has already 5px */
 }
 
 /* ... except between code cells! */
-.nblast + .nbinput {
+.nblast.container + .nbinput.container {
     margin-top: -19px;
 }
 
@@ -294,7 +296,7 @@
 <div class="section" id="trajectory-formats">
 <h4>Trajectory formats<a class="headerlink" href="#trajectory-formats" title="Permalink to this headline">¶</a></h4>
 <p>If no <code class="docutils literal notranslate"><span class="pre">format</span></code> keyword is provided, <a class="reference external" href="https://www.mdanalysis.org/docs/documentation_pages/coordinates/chain.html#MDAnalysis.coordinates.chain.ChainReader" title="(in MDAnalysis v0.20)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ChainReader</span></code></a> will try to guess the format for each file from its extension. You can force <a class="reference external" href="https://www.mdanalysis.org/docs/documentation_pages/coordinates/chain.html#MDAnalysis.coordinates.chain.ChainReader" title="(in MDAnalysis v0.20)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ChainReader</span></code></a> to use the same format for every file by using the <code class="docutils literal notranslate"><span class="pre">format</span></code> keyword. You can also specify which format to use by file, by passing in a sequence of <code class="docutils literal notranslate"><span class="pre">(filename,</span> <span class="pre">format)</span></code> tuples.</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="kn">import</span> <span class="nn">MDAnalysis</span> <span class="kn">as</span> <span class="nn">mda</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="kn">import</span> <span class="nn">MDAnalysis</span> <span class="k">as</span> <span class="nn">mda</span>
 
 <span class="gp">In [2]: </span><span class="kn">from</span> <span class="nn">MDAnalysis.tests.datafiles</span> <span class="kn">import</span> <span class="n">PDB</span><span class="p">,</span> <span class="n">GRO</span>
 
@@ -321,7 +323,7 @@ to write the entire state to file.</p>
 automatically transfers a trajectory to memory:</p>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [5]: </span><span class="kn">from</span> <span class="nn">MDAnalysis.tests.datafiles</span> <span class="kn">import</span> <span class="n">TPR</span><span class="p">,</span> <span class="n">XTC</span>
 
-<span class="gp">In [6]: </span><span class="n">universe</span> <span class="o">=</span> <span class="n">mda</span><span class="o">.</span><span class="n">Universe</span><span class="p">(</span><span class="n">TPR</span><span class="p">,</span> <span class="n">XTC</span><span class="p">,</span> <span class="n">in_memory</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="gp">In [6]: </span><span class="n">universe</span> <span class="o">=</span> <span class="n">mda</span><span class="o">.</span><span class="n">Universe</span><span class="p">(</span><span class="n">TPR</span><span class="p">,</span> <span class="n">XTC</span><span class="p">,</span> <span class="n">in_memory</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>MDAnalysis uses the <a class="reference external" href="https://www.mdanalysis.org/docs/documentation_pages/coordinates/memory.html#MDAnalysis.coordinates.memory.MemoryReader" title="(in MDAnalysis v0.20)"><code class="xref py py-class docutils literal notranslate"><span class="pre">MemoryReader</span></code></a> class to load this data in.</p>
@@ -346,7 +348,7 @@ of a <a class="reference external" href="https://www.mdanalysis.org/docs/documen
 
 <span class="gp">In [10]: </span><span class="kn">from</span> <span class="nn">MDAnalysis.coordinates.memory</span> <span class="kn">import</span> <span class="n">MemoryReader</span>
 
-<span class="gp">In [11]: </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="gp">In [11]: </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
 <span class="gp">In [12]: </span><span class="n">universe</span> <span class="o">=</span> <span class="n">mda</span><span class="o">.</span><span class="n">Universe</span><span class="p">(</span><span class="n">PDB</span><span class="p">)</span>
 
@@ -364,31 +366,31 @@ of a <a class="reference external" href="https://www.mdanalysis.org/docs/documen
 <p>The <a class="reference external" href="https://www.mdanalysis.org/docs/documentation_pages/core/universe.html#MDAnalysis.core.universe.Universe.load_new" title="(in MDAnalysis v0.20)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">load_new()</span></code></a> method can be used to load coordinates into a Universe, replacing the old coordinates:</p>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [14]: </span><span class="n">coordinates</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">universe</span><span class="o">.</span><span class="n">atoms</span><span class="p">),</span> <span class="mi">3</span><span class="p">)</span>
 
-<span class="gp">In [15]: </span><span class="n">universe</span><span class="o">.</span><span class="n">load_new</span><span class="p">(</span><span class="n">coordinates</span><span class="p">,</span> <span class="n">format</span><span class="o">=</span><span class="n">MemoryReader</span><span class="p">);</span>
+<span class="gp">In [15]: </span><span class="n">universe</span><span class="o">.</span><span class="n">load_new</span><span class="p">(</span><span class="n">coordinates</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="n">MemoryReader</span><span class="p">);</span>
 
 <span class="gp">In [16]: </span><span class="n">universe</span><span class="o">.</span><span class="n">atoms</span><span class="o">.</span><span class="n">positions</span>
 <span class="gh">Out[16]: </span><span class="go"></span>
-<span class="go">array([[0.5225549 , 0.9774268 , 0.12546735],</span>
-<span class="go">       [0.5322713 , 0.49251682, 0.27905533],</span>
-<span class="go">       [0.6217166 , 0.56742156, 0.28974572],</span>
+<span class="go">array([[0.5551925 , 0.10889117, 0.6638295 ],</span>
+<span class="go">       [0.551338  , 0.04893708, 0.8713489 ],</span>
+<span class="go">       [0.9997894 , 0.11319848, 0.8654058 ],</span>
 <span class="go">       ...,</span>
-<span class="go">       [0.47345528, 0.7633691 , 0.68564266],</span>
-<span class="go">       [0.6296963 , 0.7437724 , 0.47885776],</span>
-<span class="go">       [0.64587146, 0.4230747 , 0.9054103 ]], dtype=float32)</span>
+<span class="go">       [0.2500735 , 0.19713254, 0.20875095],</span>
+<span class="go">       [0.35715505, 0.19090544, 0.68004215],</span>
+<span class="go">       [0.7456105 , 0.4960803 , 0.29110062]], dtype=float32)</span>
 </pre></div>
 </div>
 <p>or they can be directly passed in when creating a Universe.</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [17]: </span><span class="n">universe2</span> <span class="o">=</span> <span class="n">mda</span><span class="o">.</span><span class="n">Universe</span><span class="p">(</span><span class="n">PDB</span><span class="p">,</span> <span class="n">coordinates</span><span class="p">,</span> <span class="n">format</span><span class="o">=</span><span class="n">MemoryReader</span><span class="p">)</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [17]: </span><span class="n">universe2</span> <span class="o">=</span> <span class="n">mda</span><span class="o">.</span><span class="n">Universe</span><span class="p">(</span><span class="n">PDB</span><span class="p">,</span> <span class="n">coordinates</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="n">MemoryReader</span><span class="p">)</span>
 
 <span class="gp">In [18]: </span><span class="n">universe2</span><span class="o">.</span><span class="n">atoms</span><span class="o">.</span><span class="n">positions</span>
 <span class="gh">Out[18]: </span><span class="go"></span>
-<span class="go">array([[0.5225549 , 0.9774268 , 0.12546735],</span>
-<span class="go">       [0.5322713 , 0.49251682, 0.27905533],</span>
-<span class="go">       [0.6217166 , 0.56742156, 0.28974572],</span>
+<span class="go">array([[0.5551925 , 0.10889117, 0.6638295 ],</span>
+<span class="go">       [0.551338  , 0.04893708, 0.8713489 ],</span>
+<span class="go">       [0.9997894 , 0.11319848, 0.8654058 ],</span>
 <span class="go">       ...,</span>
-<span class="go">       [0.47345528, 0.7633691 , 0.68564266],</span>
-<span class="go">       [0.6296963 , 0.7437724 , 0.47885776],</span>
-<span class="go">       [0.64587146, 0.4230747 , 0.9054103 ]], dtype=float32)</span>
+<span class="go">       [0.2500735 , 0.19713254, 0.20875095],</span>
+<span class="go">       [0.35715505, 0.19090544, 0.68004215],</span>
+<span class="go">       [0.7456105 , 0.4960803 , 0.29110062]], dtype=float32)</span>
 </pre></div>
 </div>
 </div>

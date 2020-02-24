@@ -23,14 +23,16 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-        <script type="text/javascript" src="_static/jquery.js"></script>
-        <script type="text/javascript" src="_static/underscore.js"></script>
-        <script type="text/javascript" src="_static/doctools.js"></script>
-        <script type="text/javascript" src="_static/language_data.js"></script>
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-        <script type="text/javascript" src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
         <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+        <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
     
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
@@ -248,13 +250,13 @@
 /* CSS overrides for sphinx_rtd_theme */
 
 /* 24px margin */
-.nbinput.nblast,
-.nboutput.nblast {
+.nbinput.nblast.container,
+.nboutput.nblast.container {
     margin-bottom: 19px;  /* padding has already 5px */
 }
 
 /* ... except between code cells! */
-.nblast + .nbinput {
+.nblast.container + .nbinput.container {
     margin-top: -19px;
 }
 
@@ -415,7 +417,7 @@ line statistics you can add the <code class="docutils literal notranslate"><span
 </pre></div>
 </div>
 <p>To check equality up to a certain precision (e.g. floating point numbers and iterables of floats), use <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.testing.assert_almost_equal.html#numpy.testing.assert_almost_equal" title="(in NumPy v1.17)"><code class="xref py py-func docutils literal notranslate"><span class="pre">assert_almost_equal()</span></code></a> from <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/routines.testing.html#module-numpy.testing" title="(in NumPy v1.17)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">numpy.testing</span></code></a>. Do not manually round off the value and use plain <code class="docutils literal notranslate"><span class="pre">assert</span></code> statements. Do not use <code class="docutils literal notranslate"><span class="pre">pytest.approx</span></code>.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">numpy.testing</span> <span class="k">import</span> <span class="n">assert_almost_equal</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">numpy.testing</span> <span class="kn">import</span> <span class="n">assert_almost_equal</span>
 
 <span class="k">def</span> <span class="nf">test_equal_coordinates</span><span class="p">():</span>
     <span class="n">ref</span> <span class="o">=</span> <span class="n">mda</span><span class="o">.</span><span class="n">Universe</span><span class="p">(</span><span class="n">PSF</span><span class="p">,</span> <span class="n">PDB_small</span><span class="p">)</span>
@@ -424,7 +426,7 @@ line statistics you can add the <code class="docutils literal notranslate"><span
 </pre></div>
 </div>
 <p>To test for exact equality (e.g. integers, booleans, strings), use <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.testing.assert_equal.html#numpy.testing.assert_equal" title="(in NumPy v1.17)"><code class="xref py py-func docutils literal notranslate"><span class="pre">assert_equal()</span></code></a> from <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/routines.testing.html#module-numpy.testing" title="(in NumPy v1.17)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">numpy.testing</span></code></a>. As with <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.testing.assert_almost_equal.html#numpy.testing.assert_almost_equal" title="(in NumPy v1.17)"><code class="xref py py-func docutils literal notranslate"><span class="pre">assert_almost_equal()</span></code></a>, this should be used for iterables of exact values as well. Do not iterate over and compare every single value.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">numpy.testing</span> <span class="k">import</span> <span class="n">assert_equal</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">numpy.testing</span> <span class="kn">import</span> <span class="n">assert_equal</span>
 
 <span class="k">def</span> <span class="nf">test_equal_arrays</span><span class="p">(</span><span class="n">array1</span><span class="p">,</span> <span class="n">array2</span><span class="p">):</span>
     <span class="n">assert_equal</span><span class="p">(</span><span class="n">array1</span><span class="p">,</span> <span class="n">array2</span><span class="p">)</span>
@@ -441,12 +443,12 @@ line statistics you can add the <code class="docutils literal notranslate"><span
 <span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">3</span><span class="o">-</span><span class="n">fa6316479812</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
 <span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">assert_equal</span><span class="p">([</span><span class="mi">1</span><span class="p">],</span> <span class="mi">1</span><span class="p">)</span>
 
-<span class="nn">~/anaconda3/envs/mdanalysis/lib/python3.7/site-packages/numpy/testing/_private/utils.py</span> in <span class="ni">assert_equal</span><span class="nt">(actual, desired, err_msg, verbose)</span>
-<span class="g g-Whitespace">    </span><span class="mi">390</span>     <span class="c1"># isscalar test to check cases such as [np.nan] != np.nan</span>
-<span class="g g-Whitespace">    </span><span class="mi">391</span>     <span class="k">if</span> <span class="n">isscalar</span><span class="p">(</span><span class="n">desired</span><span class="p">)</span> <span class="o">!=</span> <span class="n">isscalar</span><span class="p">(</span><span class="n">actual</span><span class="p">):</span>
-<span class="ne">--&gt; </span><span class="mi">392</span>         <span class="k">raise</span> <span class="ne">AssertionError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">393</span> 
-<span class="g g-Whitespace">    </span><span class="mi">394</span>     <span class="c1"># Inf/nan/negative zero handling</span>
+<span class="nn">~/anaconda3/envs/mda/lib/python3.7/site-packages/numpy/testing/_private/utils.py</span> in <span class="ni">assert_equal</span><span class="nt">(actual, desired, err_msg, verbose)</span>
+<span class="g g-Whitespace">    </span><span class="mi">379</span>     <span class="c1"># isscalar test to check cases such as [np.nan] != np.nan</span>
+<span class="g g-Whitespace">    </span><span class="mi">380</span>     <span class="k">if</span> <span class="n">isscalar</span><span class="p">(</span><span class="n">desired</span><span class="p">)</span> <span class="o">!=</span> <span class="n">isscalar</span><span class="p">(</span><span class="n">actual</span><span class="p">):</span>
+<span class="ne">--&gt; </span><span class="mi">381</span>         <span class="k">raise</span> <span class="ne">AssertionError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">382</span> 
+<span class="g g-Whitespace">    </span><span class="mi">383</span>     <span class="k">try</span><span class="p">:</span>
 
 <span class="ne">AssertionError</span>: 
 <span class="n">Items</span> <span class="n">are</span> <span class="ow">not</span> <span class="n">equal</span><span class="p">:</span>
@@ -472,7 +474,7 @@ line statistics you can add the <code class="docutils literal notranslate"><span
 </div>
 <div class="section" id="failing-tests">
 <h4>Failing tests<a class="headerlink" href="#failing-tests" title="Permalink to this headline">¶</a></h4>
-<p>To mark an expected failure, use <a class="reference external" href="https://docs.pytest.org/en/latest/reference.html#pytest.mark.xfail" title="(in pytest v5.3.3.dev396+g706ea86b)"><code class="xref py py-func docutils literal notranslate"><span class="pre">pytest.mark.xfail()</span></code></a> decorator:</p>
+<p>To mark an expected failure, use <a class="reference external" href="https://docs.pytest.org/en/latest/reference.html#pytest.mark.xfail" title="(in pytest v5.3.3.dev365+gbfd0d183)"><code class="xref py py-func docutils literal notranslate"><span class="pre">pytest.mark.xfail()</span></code></a> decorator:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">xfail</span>
 <span class="k">def</span> <span class="nf">tested_expected_failure</span><span class="p">():</span>
     <span class="k">assert</span> <span class="mi">1</span> <span class="o">==</span> <span class="mi">2</span>
@@ -491,10 +493,10 @@ line statistics you can add the <code class="docutils literal notranslate"><span
 </div>
 <div class="section" id="skipping-tests">
 <h4>Skipping tests<a class="headerlink" href="#skipping-tests" title="Permalink to this headline">¶</a></h4>
-<p>To skip tests based on a condition, use <a class="reference external" href="https://docs.pytest.org/en/latest/reference.html#pytest.mark.skipif" title="(in pytest v5.3.3.dev396+g706ea86b)"><code class="xref py py-func docutils literal notranslate"><span class="pre">pytest.mark.skipif(condition)</span></code></a> decorator:</p>
+<p>To skip tests based on a condition, use <a class="reference external" href="https://docs.pytest.org/en/latest/reference.html#pytest.mark.skipif" title="(in pytest v5.3.3.dev365+gbfd0d183)"><code class="xref py py-func docutils literal notranslate"><span class="pre">pytest.mark.skipif(condition)</span></code></a> decorator:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="k">try</span><span class="p">:</span>
-    <span class="kn">from</span> <span class="nn">numpy</span> <span class="k">import</span> <span class="n">shares_memory</span>
+    <span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">shares_memory</span>
 <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
     <span class="n">shares_memory</span> <span class="o">=</span> <span class="kc">False</span>
 
@@ -516,7 +518,7 @@ line statistics you can add the <code class="docutils literal notranslate"><span
 </div>
 <div class="section" id="fixtures">
 <h3>Fixtures<a class="headerlink" href="#fixtures" title="Permalink to this headline">¶</a></h3>
-<p>Use <a class="reference external" href="https://docs.pytest.org/en/latest/fixture.html">fixtures</a> as much as possible to reuse “resources” between test methods/functions. Pytest fixtures are functions that run before each test function that uses that fixture. A fixture is typically set up with the <a class="reference external" href="https://docs.pytest.org/en/latest/reference.html#pytest.fixture" title="(in pytest v5.3.3.dev396+g706ea86b)"><code class="xref py py-func docutils literal notranslate"><span class="pre">pytest.fixture()</span></code></a> decorator, over a function that returns the object you need:</p>
+<p>Use <a class="reference external" href="https://docs.pytest.org/en/latest/fixture.html">fixtures</a> as much as possible to reuse “resources” between test methods/functions. Pytest fixtures are functions that run before each test function that uses that fixture. A fixture is typically set up with the <a class="reference external" href="https://docs.pytest.org/en/latest/reference.html#pytest.fixture" title="(in pytest v5.3.3.dev365+gbfd0d183)"><code class="xref py py-func docutils literal notranslate"><span class="pre">pytest.fixture()</span></code></a> decorator, over a function that returns the object you need:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span>
 <span class="k">def</span> <span class="nf">universe</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">mda</span><span class="o">.</span><span class="n">Universe</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ref_filename</span><span class="p">)</span>
@@ -574,8 +576,8 @@ line statistics you can add the <code class="docutils literal notranslate"><span
 <div class="section" id="module-imports">
 <h4>Module imports<a class="headerlink" href="#module-imports" title="Permalink to this headline">¶</a></h4>
 <p><a class="reference internal" href="module_imports.html#module-imports-in-tests"><span class="std std-ref">Do not use relative imports</span></a> in test files, as it means that tests can no longer be run from inside the test directory. Instead, use absolute imports.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">.datafiles</span> <span class="k">import</span> <span class="n">PDB</span>  <span class="c1"># this is relative and will break!</span>
-<span class="kn">from</span> <span class="nn">MDAnalysisTests.datafiles</span> <span class="k">import</span> <span class="n">PDB</span>  <span class="c1"># use this instead</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">.datafiles</span> <span class="kn">import</span> <span class="n">PDB</span>  <span class="c1"># this is relative and will break!</span>
+<span class="kn">from</span> <span class="nn">MDAnalysisTests.datafiles</span> <span class="kn">import</span> <span class="n">PDB</span>  <span class="c1"># use this instead</span>
 </pre></div>
 </div>
 </div>

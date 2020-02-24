@@ -23,14 +23,16 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../_static/jquery.js"></script>
-        <script type="text/javascript" src="../_static/underscore.js"></script>
-        <script type="text/javascript" src="../_static/doctools.js"></script>
-        <script type="text/javascript" src="../_static/language_data.js"></script>
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-        <script type="text/javascript" src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
         <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+        <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -217,13 +219,13 @@
 /* CSS overrides for sphinx_rtd_theme */
 
 /* 24px margin */
-.nbinput.nblast,
-.nboutput.nblast {
+.nbinput.nblast.container,
+.nboutput.nblast.container {
     margin-bottom: 19px;  /* padding has already 5px */
 }
 
 /* ... except between code cells! */
-.nblast + .nbinput {
+.nblast.container + .nbinput.container {
     margin-top: -19px;
 }
 
@@ -239,7 +241,7 @@
 <div class="section" id="slicing-trajectories">
 <span id="id1"></span><h1>Slicing trajectories<a class="headerlink" href="#slicing-trajectories" title="Permalink to this headline">¶</a></h1>
 <p>MDAnalysis trajectories can be indexed to return a <a class="reference external" href="https://www.mdanalysis.org/docs/documentation_pages/coordinates/base.html#MDAnalysis.coordinates.base.Timestep" title="(in MDAnalysis v0.20)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Timestep</span></code></a>, or sliced to give a <code class="xref py py-class docutils literal notranslate"><span class="pre">FrameIterator</span></code>.</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="kn">import</span> <span class="nn">MDAnalysis</span> <span class="kn">as</span> <span class="nn">mda</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="kn">import</span> <span class="nn">MDAnalysis</span> <span class="k">as</span> <span class="nn">mda</span>
 
 <span class="gp">In [2]: </span><span class="kn">from</span> <span class="nn">MDAnalysis.tests.datafiles</span> <span class="kn">import</span> <span class="n">PSF</span><span class="p">,</span> <span class="n">DCD</span>
 
@@ -250,6 +252,10 @@
 </pre></div>
 </div>
 <p>Indexing a trajectory shifts the <a class="reference external" href="https://www.mdanalysis.org/docs/documentation_pages/core/universe.html#MDAnalysis.core.universe.Universe" title="(in MDAnalysis v0.20)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Universe</span></code></a> to point towards that particular frame, updating dynamic data such as <code class="docutils literal notranslate"><span class="pre">Universe.atoms.positions</span></code>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The trajectory frame is not read from the MD data. It is the internal index assigned by MDAnalysis.</p>
+</div>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [5]: </span><span class="n">u</span><span class="o">.</span><span class="n">trajectory</span><span class="o">.</span><span class="n">frame</span>
 <span class="gh">Out[5]: </span><span class="go">4</span>
 </pre></div>
@@ -259,11 +265,11 @@
 
 <span class="gp">In [7]: </span><span class="n">frames</span> <span class="o">=</span> <span class="p">[</span><span class="n">ts</span><span class="o">.</span><span class="n">frame</span> <span class="k">for</span> <span class="n">ts</span> <span class="ow">in</span> <span class="n">fiter</span><span class="p">]</span>
 
-<span class="gp">In [8]: </span><span class="k">print</span><span class="p">(</span><span class="n">frames</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">trajectory</span><span class="o">.</span><span class="n">frame</span><span class="p">)</span>
+<span class="gp">In [8]: </span><span class="nb">print</span><span class="p">(</span><span class="n">frames</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">trajectory</span><span class="o">.</span><span class="n">frame</span><span class="p">)</span>
 <span class="go">[10, 20, 30, 40, 50, 60, 70, 80, 90] 0</span>
 </pre></div>
 </div>
-<p>You can also create a sliced trajectory with boolean indexing and fancy indexing. Boolean indexing allows you to select only frames that meet a certain condition, by passing a <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.17)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a> with the same length as the original trajectory. Only frames that have a boolean value of <code class="docutils literal notranslate"><span class="pre">True</span></code> will be in the resulting <code class="xref py py-class docutils literal notranslate"><span class="pre">FrameIterator</span></code>. For example, to select only the frames of the trajectory with an RMSD under 3 angstrom:</p>
+<p>You can also create a sliced trajectory with boolean indexing and fancy indexing. Boolean indexing allows you to select only frames that meet a certain condition, by passing a <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.17)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a> with the same length as the original trajectory. Only frames that have a boolean value of <code class="docutils literal notranslate"><span class="pre">True</span></code> will be in the resulting <code class="xref py py-class docutils literal notranslate"><span class="pre">FrameIterator</span></code>. For example, to select only the frames of the trajectory with an RMSD under 2 angstrom:</p>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [9]: </span><span class="kn">from</span> <span class="nn">MDAnalysis.analysis</span> <span class="kn">import</span> <span class="n">rms</span>
 
 <span class="gp">In [10]: </span><span class="n">protein</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s1">&#39;protein&#39;</span><span class="p">)</span>
@@ -272,7 +278,7 @@
 
 <span class="gp">In [12]: </span><span class="n">bools</span> <span class="o">=</span> <span class="n">rmsd</span><span class="o">.</span><span class="n">rmsd</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">2</span>
 
-<span class="gp">In [13]: </span><span class="k">print</span><span class="p">(</span><span class="n">bools</span><span class="p">)</span>
+<span class="gp">In [13]: </span><span class="nb">print</span><span class="p">(</span><span class="n">bools</span><span class="p">)</span>
 <span class="go">[ True  True  True  True  True  True  True  True  True  True  True  True</span>
 <span class="go">  True  True False False False False False False False False False False</span>
 <span class="go"> False False False False False False False False False False False False</span>
@@ -286,19 +292,19 @@
 </div>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [14]: </span><span class="n">fiter</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">trajectory</span><span class="p">[</span><span class="n">bools</span><span class="p">]</span>
 
-<span class="gp">In [15]: </span><span class="k">print</span><span class="p">([</span><span class="n">ts</span><span class="o">.</span><span class="n">frame</span> <span class="k">for</span> <span class="n">ts</span> <span class="ow">in</span> <span class="n">fiter</span><span class="p">])</span>
+<span class="gp">In [15]: </span><span class="nb">print</span><span class="p">([</span><span class="n">ts</span><span class="o">.</span><span class="n">frame</span> <span class="k">for</span> <span class="n">ts</span> <span class="ow">in</span> <span class="n">fiter</span><span class="p">])</span>
 <span class="go">[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]</span>
 </pre></div>
 </div>
 <p>You can also use fancy indexing to control the order of specific frames.</p>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [16]: </span><span class="n">indices</span> <span class="o">=</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">55</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
 
-<span class="gp">In [17]: </span><span class="k">print</span><span class="p">([</span><span class="n">ts</span><span class="o">.</span><span class="n">frame</span> <span class="k">for</span> <span class="n">ts</span> <span class="ow">in</span> <span class="n">u</span><span class="o">.</span><span class="n">trajectory</span><span class="p">[</span><span class="n">indices</span><span class="p">]])</span>
+<span class="gp">In [17]: </span><span class="nb">print</span><span class="p">([</span><span class="n">ts</span><span class="o">.</span><span class="n">frame</span> <span class="k">for</span> <span class="n">ts</span> <span class="ow">in</span> <span class="n">u</span><span class="o">.</span><span class="n">trajectory</span><span class="p">[</span><span class="n">indices</span><span class="p">]])</span>
 <span class="go">[10, 2, 3, 9, 4, 55, 2]</span>
 </pre></div>
 </div>
 <p>You can even slice a <code class="xref py py-class docutils literal notranslate"><span class="pre">FrameIterator</span></code> to create a new <code class="xref py py-class docutils literal notranslate"><span class="pre">FrameIterator</span></code>.</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [18]: </span><span class="k">print</span><span class="p">([</span><span class="n">ts</span><span class="o">.</span><span class="n">frame</span> <span class="k">for</span> <span class="n">ts</span> <span class="ow">in</span> <span class="n">fiter</span><span class="p">[::</span><span class="mi">3</span><span class="p">]])</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [18]: </span><span class="nb">print</span><span class="p">([</span><span class="n">ts</span><span class="o">.</span><span class="n">frame</span> <span class="k">for</span> <span class="n">ts</span> <span class="ow">in</span> <span class="n">fiter</span><span class="p">[::</span><span class="mi">3</span><span class="p">]])</span>
 <span class="go">[0, 3, 6, 9, 12]</span>
 </pre></div>
 </div>
