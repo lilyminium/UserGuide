@@ -532,7 +532,8 @@ div.rendered_html tbody tr:hover {
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="n">h</span> <span class="o">=</span> <span class="n">hole</span><span class="o">.</span><span class="n">HOLE</span><span class="p">(</span><span class="n">PDB_HOLE</span><span class="p">,</span> <span class="n">executable</span><span class="o">=</span><span class="s1">&#39;~/hole2/exe/hole&#39;</span><span class="p">,</span>
               <span class="n">logfile</span><span class="o">=</span><span class="s1">&#39;hole1.out&#39;</span><span class="p">,</span>
-              <span class="n">sphpdb</span><span class="o">=</span><span class="s1">&#39;hole1.sph&#39;</span><span class="p">)</span>
+              <span class="n">sphpdb</span><span class="o">=</span><span class="s1">&#39;hole1.sph&#39;</span><span class="p">,</span>
+              <span class="n">raseed</span><span class="o">=</span><span class="mi">31415</span><span class="p">)</span>
 <span class="n">h</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
 <span class="n">h</span><span class="o">.</span><span class="n">collect</span><span class="p">()</span>
 </pre></div>
@@ -647,7 +648,7 @@ array([[0.     , 1.19705]])
 </div>
 <p>You can also create a VMD surface from the <code class="docutils literal notranslate"><span class="pre">hole1.sph</span></code> output file, using the <code class="docutils literal notranslate"><span class="pre">create_vmd_surface</span></code> function.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -656,7 +657,7 @@ array([[0.     , 1.19705]])
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
@@ -676,7 +677,7 @@ array([[0.     , 1.19705]])
 <h2>Using HOLE with a trajectory<a class="headerlink" href="#Using-HOLE-with-a-trajectory" title="Permalink to this headline">¶</a></h2>
 <p>One of the limitations of the <code class="docutils literal notranslate"><span class="pre">hole</span></code> program is that it can only accept PDB files. In order to use other formats with <code class="docutils literal notranslate"><span class="pre">hole</span></code>, or to run <code class="docutils literal notranslate"><span class="pre">hole</span></code> on trajectories, we can use the <code class="docutils literal notranslate"><span class="pre">hole.HOLEtraj</span></code> class with an <code class="docutils literal notranslate"><span class="pre">MDAnalysis.Universe</span></code>. While the example file below is a PDB, you can use any files to create your Universe.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
