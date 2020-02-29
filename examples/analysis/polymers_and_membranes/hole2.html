@@ -654,7 +654,6 @@ The pore is 42.4 angstroms long
 <span class="n">u</span> <span class="o">=</span> <span class="n">mda</span><span class="o">.</span><span class="n">Universe</span><span class="p">(</span><span class="n">MULTIPDB_HOLE</span><span class="p">)</span>
 
 <span class="n">ha</span> <span class="o">=</span> <span class="n">hole2</span><span class="o">.</span><span class="n">HoleAnalysis</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">select</span><span class="o">=</span><span class="s1">&#39;protein&#39;</span><span class="p">,</span>
-                        <span class="n">cpoint</span><span class="o">=</span><span class="s1">&#39;center_of_geometry&#39;</span><span class="p">,</span>
                         <span class="n">executable</span><span class="o">=</span><span class="s1">&#39;~/hole2/exe/hole&#39;</span><span class="p">)</span>
 <span class="n">ha</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">random_seed</span><span class="o">=</span><span class="mi">31415</span><span class="p">)</span>
 </pre></div>
@@ -666,7 +665,7 @@ The pore is 42.4 angstroms long
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-&lt;MDAnalysis.analysis.hole2.hole.HoleAnalysis at 0x10f3f1850&gt;
+&lt;MDAnalysis.analysis.hole2.hole.HoleAnalysis at 0x1196bd450&gt;
 </pre></div></div>
 </div>
 <div class="section" id="Working-with-the-data">
@@ -687,16 +686,16 @@ The pore is 42.4 angstroms long
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-rec.array([(-21.01227, 15.3468 , -39.23993),
-           (-20.91227, 12.63403, -34.6473 ),
-           (-20.81227, 10.63723, -30.05467),
-           (-20.71227,  9.58447, -27.7256 ),
-           (-20.61227,  8.87309, -25.39653),
-           (-20.51227,  8.56876, -23.62047),
-           (-20.41227,  8.56275, -21.84441),
-           (-20.31227,  8.47622, -21.74275),
-           (-20.21227,  8.38983, -21.64108),
-           (-20.11227,  8.30039, -21.54024)],
+rec.array([(-22.6126, 15.66883, -38.97872),
+           (-22.5126, 13.83146, -35.40019),
+           (-22.4126, 12.12538, -31.82166),
+           (-22.3126, 10.94911, -29.09955),
+           (-22.2126, 10.27766, -26.37744),
+           (-22.1126, 10.06506, -24.92505),
+           (-22.0126, 10.02756, -23.47266),
+           (-21.9126,  9.93575, -23.3718 ),
+           (-21.8126,  9.84409, -23.27094),
+           (-21.7126,  9.74834, -23.16823)],
           dtype=[(&#39;rxn_coord&#39;, &#39;&lt;f8&#39;), (&#39;radius&#39;, &#39;&lt;f8&#39;), (&#39;cen_line_D&#39;, &#39;&lt;f8&#39;)])
 </pre></div></div>
 </div>
@@ -737,7 +736,7 @@ dict_keys([&#39;rxn_coord&#39;, &#39;radius&#39;, &#39;cen_line_D&#39;])
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[31]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -751,13 +750,13 @@ dict_keys([&#39;rxn_coord&#39;, &#39;radius&#39;, &#39;cen_line_D&#39;])
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-3983
+4573
 </pre></div></div>
 </div>
 <p>You may also want to collect the radii in bins of <code class="docutils literal notranslate"><span class="pre">rxn_coord</span></code> for the entire trajectory with the <code class="docutils literal notranslate"><span class="pre">bin_radii()</span></code> function. <code class="docutils literal notranslate"><span class="pre">range</span></code> should be a tuple of the lower and upper edges of the first and last bins, respectively. If <code class="docutils literal notranslate"><span class="pre">range=None</span></code>, the minimum and maximum values of <code class="docutils literal notranslate"><span class="pre">rxn_coord</span></code> are used.</p>
 <p><code class="docutils literal notranslate"><span class="pre">bins</span></code> can be either an iterable of (lower, upper) edges (in which case <code class="docutils literal notranslate"><span class="pre">range</span></code> is ignored), or a number specifying how many bins to create with <code class="docutils literal notranslate"><span class="pre">range</span></code>.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -767,7 +766,7 @@ dict_keys([&#39;rxn_coord&#39;, &#39;radius&#39;, &#39;cen_line_D&#39;])
 </div>
 <p>The closely related <code class="docutils literal notranslate"><span class="pre">histogram_radii()</span></code> function takes the same arguments as <code class="docutils literal notranslate"><span class="pre">bin_radii()</span></code> to group the pore radii, but allows you to specify an aggregating function with <code class="docutils literal notranslate"><span class="pre">aggregator</span></code> (default: <code class="docutils literal notranslate"><span class="pre">np.mean</span></code>) that will be applied to each array of radii. The arguments for this function, and returned values, are analogous to those for <code class="docutils literal notranslate"><span class="pre">np.histogram</span></code>.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -778,7 +777,7 @@ dict_keys([&#39;rxn_coord&#39;, &#39;radius&#39;, &#39;cen_line_D&#39;])
 </div>
 <p>We can use this to plot the mean radii of the pore over the trajectory. (You can also accomplish this with the <code class="docutils literal notranslate"><span class="pre">plot_mean_profile()</span></code> function shown below, by setting <code class="docutils literal notranslate"><span class="pre">n_std=0</span></code>.)</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -798,7 +797,7 @@ dict_keys([&#39;rxn_coord&#39;, &#39;radius&#39;, &#39;cen_line_D&#39;])
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">HoleAnalysis</span></code> also has the <code class="docutils literal notranslate"><span class="pre">min_radius()</span></code> function, which will return the minimum radius in angstrom for each frame. The resulting array has the shape (#n_frames, 2).</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -808,26 +807,26 @@ dict_keys([&#39;rxn_coord&#39;, &#39;radius&#39;, &#39;cen_line_D&#39;])
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-array([[ 0.     , -0.23655],
-       [ 1.     ,  1.56731],
-       [ 2.     ,  1.53329],
-       [ 3.     ,  1.42503],
-       [ 4.     ,  1.2426 ],
-       [ 5.     ,  1.19813],
-       [ 6.     ,  1.29624],
-       [ 7.     ,  1.43776],
-       [ 8.     ,  1.51123],
-       [ 9.     ,  0.87855],
-       [10.     ,  0.99659]])
+array([[ 0.     ,  1.61218],
+       [ 1.     ,  1.56738],
+       [ 2.     ,  1.53351],
+       [ 3.     ,  1.42563],
+       [ 4.     ,  1.24399],
+       [ 5.     ,  1.19819],
+       [ 6.     ,  1.29628],
+       [ 7.     ,  1.44049],
+       [ 8.     ,  1.5113 ],
+       [ 9.     ,  1.52688],
+       [10.     ,  1.55981]])
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -850,7 +849,7 @@ array([[ 0.     , -0.23655],
 <p>The <code class="docutils literal notranslate"><span class="pre">create_vmd_surface()</span></code> method is built into the <code class="docutils literal notranslate"><span class="pre">HoleAnalysis</span></code> class. It writes a VMD file that changes the pore surface for each frame in VMD. Again, load your file and source the file in the Tk Console:</p>
 <p><code class="docutils literal notranslate"><span class="pre">source</span> <span class="pre">holeanalysis.vmd</span></code></p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -859,7 +858,7 @@ array([[ 0.     , -0.23655],
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
@@ -873,7 +872,7 @@ array([[ 0.     , -0.23655],
 <h3>Plotting<a class="headerlink" href="#Plotting" title="Permalink to this headline">¶</a></h3>
 <p><code class="docutils literal notranslate"><span class="pre">HoleAnalysis</span></code> has several convenience methods for plotting. <code class="docutils literal notranslate"><span class="pre">plot()</span></code> plots the HOLE radius over each pore coordinate, differentiating each frame with colour.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -890,7 +889,7 @@ array([[ 0.     , -0.23655],
 </div>
 <p>You can choose to plot specific frames, or specify colours or a colour map. Please see the documentation for a full description of arguments.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -907,7 +906,7 @@ array([[ 0.     , -0.23655],
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">plot3D()</span></code> function separates each frame onto its own axis in a 3D plot.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -924,7 +923,7 @@ array([[ 0.     , -0.23655],
 </div>
 <p>You can choose to plot only the part of each pore lower than a certain radius by setting <code class="docutils literal notranslate"><span class="pre">r_max</span></code>.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -941,7 +940,7 @@ array([[ 0.     , -0.23655],
 </div>
 <p>You can also plot the mean and standard deviation of the pore radius over the pore coordinate.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -970,7 +969,7 @@ array([[ 0.     , -0.23655],
 <p>Please cite (<a class="bibtex reference internal" href="../../../references.html#stelzl-flexible-2014" id="id7">[SFSB14]</a>) when using the <code class="docutils literal notranslate"><span class="pre">over_order_parameters</span></code> functionality.</p>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -984,7 +983,7 @@ array([[ 0.     , -0.23655],
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
@@ -996,7 +995,7 @@ array([6.10501252e+00, 4.88398472e+00, 3.66303524e+00, 2.44202454e+00,
 </div>
 <p>You can pass this in as <code class="docutils literal notranslate"><span class="pre">order_parameter</span></code>. The resulting <code class="docutils literal notranslate"><span class="pre">profiles</span></code> dictionary will have your order parameters as keys. <strong>You should be careful with this if your order parameter has repeated values, as duplicate keys are not possible; each duplicate key just overwrites the previous value.</strong></p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1006,7 +1005,7 @@ array([6.10501252e+00, 4.88398472e+00, 3.66303524e+00, 2.44202454e+00,
 </div>
 <p>You can see here that the dictionary does not order the entries by the order parameter. If you iterate over the dictionary, it will return each (key, value) pair in sorted key order.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[25]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1020,22 +1019,22 @@ array([6.10501252e+00, 4.88398472e+00, 3.66303524e+00, 2.44202454e+00,
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-1.6728554140225013e-07 543
-1.2210016190719406 389
-1.2210052104208637 511
-2.4420245432434005 419
-2.4420245634673616 399
-3.6630340992950225 379
-3.663035235691455 443
-4.883984723991125 407
-4.883984778674993 149
-6.105012519709198 205
-6.105022620520391 139
+1.6728554140225013e-07 401
+1.2210016190719406 399
+1.2210052104208637 519
+2.4420245432434005 443
+2.4420245634673616 359
+3.6630340992950225 399
+3.663035235691455 421
+4.883984723991125 425
+4.883984778674993 363
+6.105012519709198 453
+6.105022620520391 391
 </pre></div></div>
 </div>
 <p>You can also select specific frames for the new profiles.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[25]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[26]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1045,19 +1044,19 @@ array([6.10501252e+00, 4.88398472e+00, 3.66303524e+00, 2.44202454e+00,
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[25]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[26]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-dict_keys([1.2210052104208637, 4.883984778674993, 6.105012519709198])
+odict_keys([1.2210052104208637, 4.883984778674993, 6.105012519709198])
 </pre></div></div>
 </div>
 <div class="section" id="id8">
 <h3>Plotting<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
 <p><code class="docutils literal notranslate"><span class="pre">HoleAnalysis</span></code> also provides convenience functions for plotting over order parameters. Unlike <code class="docutils literal notranslate"><span class="pre">plot()</span></code>, <code class="docutils literal notranslate"><span class="pre">plot_order_parameters()</span></code> requires an <code class="docutils literal notranslate"><span class="pre">aggregator</span></code> function that reduces an array of radii to a singular value. The default function is <code class="docutils literal notranslate"><span class="pre">min()</span></code>. You can also pass in functions such as <code class="docutils literal notranslate"><span class="pre">max()</span></code> or <code class="docutils literal notranslate"><span class="pre">np.mean()</span></code>, or define your own function to operate on an array and return a vlue.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[26]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[27]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1077,7 +1076,7 @@ dict_keys([1.2210052104208637, 4.883984778674993, 6.105012519709198])
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">plot3D_order_parameters()</span></code> functions in a similar way to <code class="docutils literal notranslate"><span class="pre">plot3D()</span></code>, although you need to pass in the order parameters.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[27]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[28]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1101,7 +1100,7 @@ dict_keys([1.2210052104208637, 4.883984778674993, 6.105012519709198])
 <p>For <code class="docutils literal notranslate"><span class="pre">hole()</span></code>, pass in <code class="docutils literal notranslate"><span class="pre">keep_files=False</span></code> to delete HOLE files as soon as the analysis is done. However, this will also remove the sphpdb file required to create a VMD surface from the analysis. If you need to write a VMD surface file, use the <code class="docutils literal notranslate"><span class="pre">HoleAnalysis</span></code> class instead.</p>
 <p>You can track the created files at the <code class="docutils literal notranslate"><span class="pre">tmp_files</span></code> attribute.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[28]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[29]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1110,7 +1109,7 @@ dict_keys([1.2210052104208637, 4.883984778674993, 6.105012519709198])
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[28]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[29]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
@@ -1142,7 +1141,7 @@ dict_keys([1.2210052104208637, 4.883984778674993, 6.105012519709198])
 </div>
 <p>The built-in method <code class="docutils literal notranslate"><span class="pre">delete_temporary_files()</span></code> will remove these.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[29]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[30]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1152,7 +1151,7 @@ dict_keys([1.2210052104208637, 4.883984778674993, 6.105012519709198])
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[29]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[30]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
@@ -1162,7 +1161,7 @@ dict_keys([1.2210052104208637, 4.883984778674993, 6.105012519709198])
 </div>
 <p>Alternatively, you can use <code class="docutils literal notranslate"><span class="pre">HoleAnalysis</span></code> as a context manager. When you exit the block, the temporary files will be deleted automatically.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[30]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[31]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1181,7 +1180,7 @@ dict_keys([1.2210052104208637, 4.883984778674993, 6.105012519709198])
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[34]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[32]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1190,12 +1189,12 @@ dict_keys([1.2210052104208637, 4.883984778674993, 6.105012519709198])
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[34]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[32]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-20.0962
+17.97622
 </pre></div></div>
 </div>
 </div>
