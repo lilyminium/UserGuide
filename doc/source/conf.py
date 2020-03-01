@@ -73,7 +73,7 @@ templates_path = ['_templates']
 # directories to ignore when looking for source files.
 # This pattern also affects html_static_path and html_extra_path.
 exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store',
-                    '.ipynb_checkpoints', '**/.ipynb_checkpoints', 'scripts', '.*.ipynb', '.*']
+                    '.ipynb_checkpoints', '**/.ipynb_checkpoints', 'scripts', '.*.ipynb']
 
 # -- Options for HTML output -------------------------------------------------
 
@@ -152,7 +152,7 @@ intersphinx_mapping = {'https://docs.python.org/': None,
 
 # nbsphinx
 html_js_files = [
-    'https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js',
+    # 'https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js',
     DEFAULT_EMBED_REQUIREJS_URL,
 ]
 
