@@ -133,8 +133,4 @@ Wherever possible, do not take these conversations to private channels, includin
    preparing_releases_and_hotfixes
    module_imports
    testing
-<<<<<<< HEAD
    references
-=======
-   
->>>>>>> upstream/fix-53

@@ -153,7 +153,7 @@ intersphinx_mapping = {'https://docs.python.org/': None,
 # nbsphinx
 html_js_files = [
     # 'https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js',
-    DEFAULT_EMBED_REQUIREJS_URL,
+    # DEFAULT_EMBED_REQUIREJS_URL,
 ]
 
 nbsphinx_prolog = r"""
