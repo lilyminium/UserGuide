@@ -542,7 +542,7 @@ div.rendered_html tbody tr:hover {
 <h2>Helix analysis<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
 <p>HELANAL can be used to characterize the geometry of helices with at least 9 residues. The geometry of an alpha helix is characterized by computing local helix axes and local helix origins for four contiguous C-alpha atoms, using the procedure of Sugeta and Miyazawa (<a class="bibtex reference internal" href="../../../references.html#sugeta-general-1967" id="id7">[SM67]</a>) and sliding this window over the length of the helix in steps of one C-alpha atom.</p>
 <p><code class="docutils literal notranslate"><span class="pre">HELANAL</span></code> computes a number of properties.</p>
-<center><div style="width: 600px; text-align: center;"><p><img alt="local properties" src="examples/analysis/structure/helanal_images/local_properties.png" /></p>
+<center><div style="width: 600px; text-align: center;"><p><img alt="local properties" src="../../../_images/local_properties.png" /></p>
 </div></center><p>For each sliding window, it calculates:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">local_rotation_vectors</span></code>: the vectors bisecting the angles of the middle 2 atoms</p></li>
@@ -553,9 +553,9 @@ div.rendered_html tbody tr:hover {
 <li><p><code class="docutils literal notranslate"><span class="pre">local_heights</span></code>: the rise of each helix</p></li>
 </ul>
 <p>HELANAL calculates the bends between each <code class="docutils literal notranslate"><span class="pre">local_axes</span></code> and fits the vector <code class="docutils literal notranslate"><span class="pre">global_axes</span></code> to the <code class="docutils literal notranslate"><span class="pre">local_origins</span></code>.</p>
-<center><div style="width: 150px; text-align: center;"><p><img alt="local axes" src="examples/analysis/structure/helanal_images/local_axes_properties.png" /></p>
+<center><div style="width: 150px; text-align: center;"><p><img alt="local axes" src="../../../_images/local_axes_properties.png" /></p>
 </div></center><p><code class="docutils literal notranslate"><span class="pre">all_bends</span></code> contains the angles between every <code class="docutils literal notranslate"><span class="pre">local_axes</span></code> (<span class="math notranslate nohighlight">\(\alpha\)</span>) in a pairwise matrix, whereas <code class="docutils literal notranslate"><span class="pre">local_bends</span></code> contains the angles between <code class="docutils literal notranslate"><span class="pre">local_axes</span></code> that are calculated 3 windows apart (<span class="math notranslate nohighlight">\(\beta\)</span>). The <code class="docutils literal notranslate"><span class="pre">global_tilts</span></code> (<span class="math notranslate nohighlight">\(\gamma\)</span>) are calculated as the angle between the <code class="docutils literal notranslate"><span class="pre">global_axes</span></code> and the user-given reference <code class="docutils literal notranslate"><span class="pre">ref_axis</span></code>.</p>
-<center><div style="width: 200px; text-align: center;"><p><img alt="screw angles" src="examples/analysis/structure/helanal_images/screw_angles.png" /></p>
+<center><div style="width: 200px; text-align: center;"><p><img alt="screw angles" src="../../../_images/screw_angles.png" /></p>
 </div></center><p>Finally, <code class="docutils literal notranslate"><span class="pre">local_screw</span></code> angles are computed between the <code class="docutils literal notranslate"><span class="pre">local_rotation_vectors</span></code> and the normal plane of the <code class="docutils literal notranslate"><span class="pre">global_axes</span></code>.</p>
 <div class="section" id="Running-the-analysis">
 <h3>Running the analysis<a class="headerlink" href="#Running-the-analysis" title="Permalink to this headline">¶</a></h3>
