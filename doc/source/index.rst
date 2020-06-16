@@ -11,6 +11,8 @@ Welcome to MDAnalysis User Guide's documentation!
 
 **Last updated:** |today|
 
+many many many change
+
 **MDAnalysis** (`www.mdanalysis.org`_) is a Python
 toolkit to analyse molecular dynamics files and trajectories in :ref:`many popular formats <formats>`. MDAnalysis can write
 most of these formats, too, together with atom selections for use in :ref:`visualisation tools or other analysis programs <selection-exporters>`.
@@ -72,7 +74,7 @@ Wherever possible, do not take these conversations to private channels, includin
    installation
    examples/quickstart
    faq
-   examples/index
+   examples/README
 
 .. toctree::
    :maxdepth: 1
@@ -84,7 +86,14 @@ Wherever possible, do not take these conversations to private channels, includin
    groups_of_atoms
    selections
    topology_system
-   trajectories
+
+.. toctree::
+   :maxdepth: 1
+   :caption: Trajectories
+
+   trajectories/trajectories
+   trajectories/slicing_trajectories
+   trajectories/transformations
 
 .. toctree::
    :maxdepth: 1
@@ -103,7 +112,8 @@ Wherever possible, do not take these conversations to private channels, includin
    :caption: Analysis
    :hidden:
 
-   analysis
+   examples/analysis/README
+   examples/analysis/custom_trajectory_analysis
 
 .. toctree::
    :maxdepth: 1
@@ -112,6 +122,7 @@ Wherever possible, do not take these conversations to private channels, includin
 
    standard_selections
    advanced_topology
+   datasets
 
 .. toctree::
    :maxdepth: 1
@@ -124,4 +135,4 @@ Wherever possible, do not take these conversations to private channels, includin
    preparing_releases_and_hotfixes
    module_imports
    testing
-   datasets
+   references

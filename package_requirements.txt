@@ -1,0 +1,2 @@
+-e git+https://github.com/MDAnalysis/mdanalysis@develop#egg=mdanalysis&subdirectory=package
+-e git+https://github.com/MDAnalysis/mdanalysis@develop#egg=mdanalysistests&subdirectory=testsuite
