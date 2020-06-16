@@ -4,8 +4,8 @@ jupyter-client==5.3.3
 jupyter-contrib-core==0.3.3
 jupyter-contrib-nbextensions==0.5.1
 jupyter-core==4.5.0
-MDAnalysis
-MDAnalysisTests
+-e git+https://github.com/MDAnalysis/mdanalysis@develop#egg=mdanalysis&subdirectory=package
+-e git+https://github.com/MDAnalysis/mdanalysis@develop#egg=mdanalysistests&subdirectory=testsuite
 nbsphinx==0.4.2
 nglview==2.7.1
 numpy==1.17.2
