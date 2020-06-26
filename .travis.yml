@@ -25,7 +25,7 @@ script:
   - export URL="https://userguide.mdanalysis.org/"
   - export VERSION=$(python -c "import mda; print(mda.__version__)")
   - make -C ${SPHINX_DIR} html
-  - mkdir $VERSION && mv ${HTML_DIR}/* $VERSION/ && mv $VERSION ${HTML_DIR}/${VERSION}
+  - mkdir ${VERSION} && mv ${HTML_DIR}/* ${VERSION}/ && mv ${VERSION} ${HTML_DIR}/${VERSION}
   - cd ${HTML_DIR} && touch .nojekyll
   - python ${TRAVIS_BUILD_DIR}/maintainer/update_json_stubs_sitemap.py
   - cd -
