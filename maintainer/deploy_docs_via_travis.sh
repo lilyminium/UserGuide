@@ -62,7 +62,9 @@ touch .nojekyll
 git add -A ${VERSION}/
 git add .nojekyll versions.json
 git add dev latest
-git add *.xml *.html
+git add *.xml 
+
+if [ $(ls *.html) ]; then git add *.html; fi
 
 ls *
 
