@@ -8,13 +8,13 @@ dependencies:
   - nglview
   - sphinx
   - ipywidgets
-  - mdanalysis=1.0.0
-  - MDAnalysisTests=1.0.0
   - plotly
   - pip:
       - sphinx_rtd_theme
       - sphinx-sitemap
       - msmb_theme
+      - git+https://github.com/MDAnalysis/mdanalysis@develop#egg=mdanalysis&subdirectory=package
+      - git+https://github.com/MDAnalysis/mdanalysis@develop#egg=mdanalysistests&subdirectory=testsuite
       - nbsphinx
       - ipython
       - tabulate

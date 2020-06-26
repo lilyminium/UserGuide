@@ -42,7 +42,7 @@ deploy:
   url: "mdauserguide.minium.com.au"
   on:
     # branch: master
-    branch: docversions
+    branch: checkver6
     python: "3.6"
   local_dir: "${HTML_DIR}"
   project_name: UserGuide
