@@ -5,11 +5,11 @@ channels:
   - plotly
 dependencies:
   - jupyter_contrib_nbextensions
+  - cython
+  - numpy
   - nglview
   - sphinx
   - ipywidgets
-  - mdanalysis=1.0.0
-  - MDAnalysisTests=1.0.0
   - plotly
   - pip
   - pip:
@@ -21,3 +21,5 @@ dependencies:
       - tabulate
       - sphinxcontrib-bibtex
       - pybtex
+      - git+https://github.com/MDAnalysis/mdanalysis@develop#egg=mdanalysis[analysis]&subdirectory=package
+      - git+https://github.com/MDAnalysis/mdanalysis@develop#egg=mdanalysistests&subdirectory=testsuite
