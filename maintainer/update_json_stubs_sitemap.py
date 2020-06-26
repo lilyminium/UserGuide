@@ -87,6 +87,8 @@ if not already_exists:
 with open("versions.json", 'w') as f:
     json.dump(versions, f, indent=2)
 
+print('versions')
+print(versions)
 
 for ver in versions[::-1]:
     if ver['latest']:

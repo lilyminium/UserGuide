@@ -64,9 +64,11 @@ git add .nojekyll versions.json
 git add dev latest
 git add *.xml *.html
 
+ls *
+
 # check for anything to commit
 # https://stackoverflow.com/questions/3878624/how-do-i-programmatically-determine-if-there-are-uncommited-changes
 git diff-index --quiet HEAD -- || git commit -m "rebuilt html docs for version ${VERSION} from branch ${GH_DOC_BRANCH} with sphinx at ${rev}"
-git push -q upstream HEAD:gh-pages
+git push -f -q upstream HEAD:gh-pages
 
 
