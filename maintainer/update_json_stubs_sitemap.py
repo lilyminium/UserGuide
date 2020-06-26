@@ -87,7 +87,6 @@ if not already_exists:
 with open("versions.json", 'w') as f:
     json.dump(versions, f, indent=2)
 
-
 for ver in versions[::-1]:
     if ver['latest']:
         latest_version = ver['version']
@@ -109,7 +108,8 @@ else:
         dev_version = None
 
 if latest_version:
-    html_files = glob.glob(f'{latest_version}/*.html', recursive=True)
+    html_files = glob.glob(f'{latest_version}/**/*.html', recursive=True)
+    print(html_files)
     for file in html_files:
         outfile = file.strip(f'{latest_version}/')
         dirname = os.path.dirname(outfile)

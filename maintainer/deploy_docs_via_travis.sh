@@ -62,11 +62,23 @@ touch .nojekyll
 git add -A ${VERSION}/
 git add .nojekyll versions.json
 git add dev latest
-git add *.xml *.html
+git add *.xml
+
+echo "ls *"
+ls *
+
+echo $(ls *.html | wc -l)
+
+if [ "$(ls *.html | wc -l)" -ge "1" ]; then
+    cd $VERSION && mdfiles=$(ls -d *) && cd -
+    for item in $mdfiles ; do
+        if [[ -f $item ]] || [[ -d $item ]]; then echo $item && git add $item; fi
+    done
+fi
 
 # check for anything to commit
 # https://stackoverflow.com/questions/3878624/how-do-i-programmatically-determine-if-there-are-uncommited-changes
 git diff-index --quiet HEAD -- || git commit -m "rebuilt html docs for version ${VERSION} from branch ${GH_DOC_BRANCH} with sphinx at ${rev}"
-git push -q upstream HEAD:gh-pages
+git push -q -f upstream HEAD:gh-pages
 
 
