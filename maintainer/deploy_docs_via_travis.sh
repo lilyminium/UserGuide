@@ -62,8 +62,8 @@ touch .nojekyll
 
 git add -A ${VERSION}/
 git add .nojekyll versions.json
-git add index.html dev latest
-git add *.xml
+git add dev latest
+git add *.xml *.html
 
 # check for anything to commit
 # https://stackoverflow.com/questions/3878624/how-do-i-programmatically-determine-if-there-are-uncommited-changes
