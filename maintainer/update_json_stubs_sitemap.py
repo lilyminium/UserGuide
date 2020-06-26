@@ -91,6 +91,7 @@ with open("versions.json", 'w') as f:
 for ver in versions[::-1]:
     if ver['latest']:
         latest_version = ver['version']
+        break
 else:
     try:
         latest_version = versions[-1]['version']

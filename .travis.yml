@@ -35,6 +35,7 @@ script:
   # bash ${TRAVIS_BUILD_DIR}/maintainer/deploy_docs_via_travis.sh
 after_success:
   - |
+    python -c 'import os,sys,fcntl; flags = fcntl.fcntl(sys.stdout, fcntl.F_GETFL); fcntl.fcntl(sys.stdout, fcntl.F_SETFL, flags&~os.O_NONBLOCK);'
     export URL="https://mdauserguide.minium.com.au/"
     export VERSION=$(python -c "import MDAnalysis; print(MDAnalysis.__version__)")
     export MAINTAIN_DIR=${TRAVIS_BUILD_DIR}/maintainer

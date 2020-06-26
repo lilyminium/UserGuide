@@ -55,7 +55,6 @@ git reset upstream/gh-pages
 
 # for dev, latest, home redirects
 mkdir dev latest
-export URL="https://mdauserguide.minium.com.au"
 python ${MAINTAIN_DIR}/update_json_stubs_sitemap.py
 touch .
 touch .nojekyll
