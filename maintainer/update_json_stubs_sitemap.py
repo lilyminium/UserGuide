@@ -11,6 +11,7 @@
 
 import json
 import os
+import errno
 import glob
 import shutil
 import textwrap
@@ -109,7 +110,16 @@ else:
 if latest_version:
     html_files = glob.glob(f'{latest_version}/*.html', recursive=True)
     for file in html_files:
-        write_redirect(file)
+        outfile = file.strip(f'{latest_version}/')
+        dirname = os.path.dirname(outfile)
+        if dirname and not os.path.exists(dirname):
+            try:
+                os.makedirs(dirname)
+            except OSError as exc:
+                if exc.errno != errno.EEXIST:
+                    raise
+
+        write_redirect(file, '', outfile)
     write_redirect('index.html', latest_version, 'latest/index.html')
 
 if dev_version:
