@@ -4,8 +4,10 @@ channels:
   - defaults
   - plotly
 dependencies:
+  - cython
   - jupyter_contrib_nbextensions
   - nglview
+  - numpy
   - sphinx
   - ipywidgets
   - plotly
@@ -13,7 +15,7 @@ dependencies:
       - sphinx_rtd_theme
       - sphinx-sitemap
       - msmb_theme
-      - git+https://github.com/MDAnalysis/mdanalysis@develop#egg=mdanalysis&subdirectory=package
+      - git+https://github.com/MDAnalysis/mdanalysis@develop#egg=mdanalysis[analysis]&subdirectory=package
       - git+https://github.com/MDAnalysis/mdanalysis@develop#egg=mdanalysistests&subdirectory=testsuite
       - nbsphinx
       - ipython

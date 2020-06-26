@@ -37,9 +37,7 @@ deploy:
   keep_history: true
   github_token: "$GH_TOKEN"
   # fqdn: "userguide.mdanalysis.org"
-  url: "mdauserguide.minium.com.au"
   fqdn: "mdauserguide.minium.com.au"
-  url: "mdauserguide.minium.com.au"
   on:
     # branch: master
     branch: checkver6
