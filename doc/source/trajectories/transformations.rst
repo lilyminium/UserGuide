@@ -16,10 +16,10 @@ The :mod:`MDAnalysis.transformations` module contains a collection of transforma
 
     u = mda.Universe(TPR, XTC)
     protein = u.select_atoms('protein')
-    align_transform = trans.fit_rot_trans(protein, protein, weights='mass')
+    align_transform = trans.fit_rot_trans(protein, protein, weights=protein.masses)
     u.trajectory.add_transformations(align_transform)
 
-Other implemented transformations include functions to :mod:`~MDAnalysis.transformations.translate`, :mod:`~MDAnalysis.transformations.rotate`, :mod:`~MDAnalysis.transformations.fit` an :class:`~MDAnalysis.core.groups.AtomGroup` to a reference, and :mod:`~MDAnalysis.transformations.wrap` or unwrap groups in the unit cell. 
+Other implemented transformations include functions to :mod:`~MDAnalysis.transformations.translate`, :mod:`~MDAnalysis.transformations.rotate`, :mod:`~MDAnalysis.transformations.fit` an :class:`~MDAnalysis.core.groups.AtomGroup` to a reference, and :mod:`~MDAnalysis.transformations.wrap` or unwrap groups in the unit cell. (Please see the MDAnalysis `on-the-fly transformations blog post`_ contains a more complete introduction to these fitting and wrapping functions.)
 
 Although you can only call :meth:`~MDAnalysis.coordinates.base.ProtoReader.add_transformations` *once*, you can pass in multiple transformations in a list, which will be executed in order. For example, the below workflow:
 
@@ -38,6 +38,8 @@ Although you can only call :meth:`~MDAnalysis.coordinates.base.ProtoReader.add_t
                 trans.wrap(water, compound='residues')]
     u.trajectory.add_transformations(*workflow)
 
+`Please see the full tutorial for more information. <examples/transformations/center_protein_in_box.ipynb#Doing-all-this-on-the-fly>`_
+
 If your transformation does not depend on something within the :class:`~MDAnalysis.core.universe.Universe` (e.g. a chosen :class:`~MDAnalysis.core.groups.AtomGroup`), you can also create a :class:`~MDAnalysis.core.universe.Universe` directly with transformations. The code below translates coordinates 1 angstrom up on the z-axis:
 
 .. ipython:: python
@@ -45,6 +47,8 @@ If your transformation does not depend on something within the :class:`~MDAnalys
     u = mda.Universe(TPR, XTC, transformations=[trans.translate([0, 0, 1])])
 
 If you need a different transformation, it is easy to implement your own.
+
+.. _`on-the-fly transformations blog post`: https://www.mdanalysis.org/2020/03/09/on-the-fly-transformations/
 
 ----------------------
 Custom transformations
@@ -54,6 +58,8 @@ At its core, a transformation function must only take a :class:`~MDAnalysis.coor
 
 .. ipython:: python
 
+    import numpy as np
+    
     def up_by_2(ts):
         """Translates atoms up by 2 angstrom"""
         ts.positions += np.array([0.0, 0.0, 0.2])
